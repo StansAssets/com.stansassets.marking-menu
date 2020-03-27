@@ -2,6 +2,7 @@
     interface IMarkingMenuInputController
     {
         void Init(IMarkingMenuInternal menu);
+        void Reset();
         void HandleInput();
     }
 }

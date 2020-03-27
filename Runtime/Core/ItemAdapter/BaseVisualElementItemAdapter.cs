@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using JetBrains.Annotations;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace StansAssets.MarkingMenuB
@@ -6,9 +8,11 @@ namespace StansAssets.MarkingMenuB
     abstract class BaseVisualElementItemAdapter<T> : IVisualElementItemAdapter<T>
         where T : IMarkingMenuItem
     {
+        public event Action OnClicked;
+
         protected const string k_DefaultUXMLPath = "MarkingMenuItemAdapter";
 
-        protected IMarkingMenuItem m_Item;
+        protected readonly IMarkingMenuItem m_Item;
         protected VisualElement m_RootElement;
         protected Vector2 m_CenterPosition;
 
@@ -29,7 +33,7 @@ namespace StansAssets.MarkingMenuB
             Disable();
             m_RootElement = rootElement;
             m_RootElement.RegisterCallback<PointerUpEvent>(PointerUpEventHandler, TrickleDown.TrickleDown);
-            m_RootElement.RegisterCallback<MouseUpEvent>(MouseUpEventHandler, TrickleDown.TrickleDown);
+            m_RootElement.RegisterCallback<PointerDownEvent>(PointerDownEventHandler, TrickleDown.TrickleDown);
         }
 
         public void Enable()
@@ -41,6 +45,8 @@ namespace StansAssets.MarkingMenuB
         public void Disable()
         {
             m_RootElement?.Remove(VisualElement);
+            m_RootElement?.UnregisterCallback<PointerUpEvent>(PointerUpEventHandler, TrickleDown.TrickleDown);
+            m_RootElement?.UnregisterCallback<PointerDownEvent>(PointerDownEventHandler, TrickleDown.TrickleDown);
         }
 
         public void SetRootPosition(Vector2 center)
@@ -60,6 +66,15 @@ namespace StansAssets.MarkingMenuB
             evt.StopImmediatePropagation();
             evt.PreventDefault();
             Debug.Log("PointerUpEvent");
+
+            OnClicked?.Invoke();
+        }
+
+        void PointerDownEventHandler(PointerDownEvent evt)
+        {
+            evt.StopImmediatePropagation();
+            evt.PreventDefault();
+            Debug.Log("PointerDownEvent");
         }
 
         void MouseUpEventHandler(MouseUpEvent evt)

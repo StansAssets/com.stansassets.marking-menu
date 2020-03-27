@@ -2,7 +2,7 @@
 
 namespace StansAssets.MarkingMenuB
 {
-    struct ItemClickedEventArgs
+    struct ItemExecutedEventArgs
     {
         internal string Id;
         internal ItemType Type;
@@ -10,7 +10,7 @@ namespace StansAssets.MarkingMenuB
 
     class ActionItem : MarkingMenuItem
     {
-        public Action<ItemClickedEventArgs> OnItemClicked;
+        public event Action<ItemExecutedEventArgs> OnItemExecuted;
         readonly string m_ActionId;
 
         public ActionItem(MarkingMenuItemModel model)
@@ -21,7 +21,7 @@ namespace StansAssets.MarkingMenuB
 
         public void Execute()
         {
-            OnItemClicked?.Invoke(new ItemClickedEventArgs()
+            OnItemExecuted?.Invoke(new ItemExecutedEventArgs()
             {
                 Id = m_ActionId,
                 Type = Model.Type,

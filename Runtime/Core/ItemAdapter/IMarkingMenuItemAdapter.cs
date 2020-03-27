@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace StansAssets.MarkingMenuB
 {
     interface IMarkingMenuItemAdapter
     {
+        event Action OnClicked;
+
         void Enable();
         void Disable();
 

@@ -67,6 +67,7 @@ namespace StansAssets.MarkingMenuB
             {
                 var item = m_MarkingMenu.Items[i];
                 var adapter = MarkingMenuFactory.MMAdapterFactory.GetAdapter(item);
+                // TODO: remove is
                 if (adapter is IVisualElementItemAdapter itemAdapter)
                 {
                     itemAdapter.SetRootElement(sceneView.rootVisualElement);

@@ -5,12 +5,6 @@ using UnityEngine;
 
 namespace StansAssets.MarkingMenuB
 {
-    class ToggleContext
-    {
-        delegate void SetDelegate();
-        delegate bool GetDelegate();
-    }
-
     interface IMarkingMenuDisplayContext
     {
         IMarkingMenuRenderer Renderer {get;}
@@ -38,28 +32,7 @@ namespace StansAssets.MarkingMenuB
         }
     }
 
-	public interface IMarkingMenu
-	{
-		event Action OnOpened;
-		event Action OnClosed;
-
-		bool Active { get; }
-		Vector2 Center { get; }
-		IList<IMarkingMenuItem> Items { get; }
-
-		void Init(MarkingMenuModel model);
-		void Open(Vector2 center);
-		void Close();
-
-		bool DebugMode { get; set; }
-	}
-
-	interface IMarkingMenuInternal : IMarkingMenu
-	{
-        IMarkingMenuDisplayContext DisplayContext { get; }
-    }
-
-	public static class MarkingMenuService
+    public static class MarkingMenuService
 	{
 		public static IMarkingMenu CreateMenu() {
 			// Reset prev state
@@ -167,7 +140,7 @@ namespace StansAssets.MarkingMenuB
             {
                 case ItemType.Action:
                     ActionItem actionItem = new ActionItem(model);
-                    actionItem.OnItemClicked += OnItemClicked;
+                    actionItem.OnItemExecuted += OnItemClicked;
                     return actionItem;
 
                 //case ItemType.Toggle:
@@ -181,7 +154,7 @@ namespace StansAssets.MarkingMenuB
         }
 
         // This callback is to link Items action Ids to actual Actions within registered ones in this class (Action, Toggles etc).
-        void OnItemClicked(ItemClickedEventArgs args)
+        void OnItemClicked(ItemExecutedEventArgs args)
         {
             Debug.Log($"Item with Id {args.Id} and Type {args.Type} clicked!");
         }
