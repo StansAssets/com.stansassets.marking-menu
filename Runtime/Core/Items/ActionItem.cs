@@ -1,11 +1,13 @@
 ﻿using System;
+using UnityEngine;
 
-namespace StansAssets.MarkingMenuB
+namespace StansAssets.MarkingMenu
 {
     struct ItemExecutedEventArgs
     {
         internal string Id;
         internal ItemType Type;
+        internal IMarkingMenuItem Item;
     }
 
     class ActionItem : MarkingMenuItem
@@ -19,12 +21,13 @@ namespace StansAssets.MarkingMenuB
             m_ActionId = model.CustomItemId;
         }
 
-        public void Execute()
+        public override void Execute()
         {
             OnItemExecuted?.Invoke(new ItemExecutedEventArgs()
             {
                 Id = m_ActionId,
                 Type = Model.Type,
+                Item = this,
             });
         }
     }

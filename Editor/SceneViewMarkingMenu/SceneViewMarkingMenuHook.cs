@@ -1,26 +1,36 @@
-﻿using UnityEditor;
+﻿using StansAssets.Foundation.UIElements;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-namespace StansAssets.MarkingMenuB
+namespace StansAssets.MarkingMenu
 {
     [InitializeOnLoad]
     static class SceneViewMarkingMenuHook
     {
         static MarkingMenuModel s_CurrentModel;
-        static IMarkingMenu s_MarkingMenu;
+        static MarkingMenu s_MarkingMenu;
         static MouseDownContext s_MouseDownContext;
 
         static SceneViewMarkingMenuHook()
         {
             Refresh();
-            SceneView.duringSceneGui += SceneViewOnduringSceneGui;
+            SceneView.duringSceneGui += SceneViewOnDuringSceneGui;
         }
 
         [MenuItem("Stans Assets/Marking Menu/Refresh")]
         static void Refresh()
         {
+            s_MarkingMenu?.Close();
+
             var model = Resources.Load("MarkingMenuModel") as MarkingMenuModel;
             s_MarkingMenu = MarkingMenuService.CreateMenu();
+            // Prevent default event handle
+            s_MarkingMenu.Root.RegisterCallback<MouseUpEvent>((args) =>
+            {
+                args.PreventDefault();
+            }, TrickleDown.TrickleDown);
+
             s_MarkingMenu.Init(model);
         }
 
@@ -39,7 +49,7 @@ namespace StansAssets.MarkingMenuB
         [MenuItem("Stans Assets/Marking Menu/Toggle Debug Mode")]
         static void ToggleDebug()
         {
-            s_MarkingMenu.DebugMode = !s_MarkingMenu.DebugMode;
+            MarkingMenu.DebugMode = !MarkingMenu.DebugMode;
         }
 
         static void OpenMarkingMenuHook(SceneView sceneView)
@@ -49,18 +59,18 @@ namespace StansAssets.MarkingMenuB
             Rect localSceneViewRect = sceneView.position;
             localSceneViewRect.position = Vector2.zero;
 
-            s_MarkingMenu.Open(localSceneViewRect.center);
+            s_MarkingMenu.Open(sceneView.rootVisualElement, localSceneViewRect.center);
         }
 
-        static void SceneViewOnduringSceneGui(SceneView obj)
+        static void SceneViewOnDuringSceneGui(SceneView sceneView)
         {
             if (s_MarkingMenu != null)
             {
-                HandleInput();
+                HandleInput(sceneView);
             }
         }
 
-        static void HandleInput()
+        static void HandleInput(SceneView sceneView)
         {
             Event e = Event.current;
 
@@ -74,13 +84,15 @@ namespace StansAssets.MarkingMenuB
                     }
                     break;
 
-                // case EventType.MouseUp:
-                //     s_MouseDownContext = new MouseDownContext(false, Vector2.zero);
-                //     if (s_MarkingMenu.Active)
-                //     {
-                //         s_MarkingMenu.Close();
-                //     }
-                //     break;
+                case EventType.MouseUp:
+                    var visualElementEvent = UIElementsUtility.CreateEvent(e);
+                    s_MarkingMenu.SendEvent(visualElementEvent);
+                    // s_MouseDownContext = new MouseDownContext(false, Vector2.zero);
+                    // if (s_MarkingMenu.Active)
+                    // {
+                    //     s_MarkingMenu.Close();
+                    // }
+                    break;
 
                 case EventType.MouseDrag:
                     e.Use();
@@ -89,7 +101,7 @@ namespace StansAssets.MarkingMenuB
                     {
                         if ((s_MouseDownContext.Position - e.mousePosition).sqrMagnitude > 25)
                         {
-                            s_MarkingMenu.Open(s_MouseDownContext.Position);
+                            s_MarkingMenu.Open(sceneView.rootVisualElement, s_MouseDownContext.Position);
                         }
                     }
                     break;
@@ -97,7 +109,6 @@ namespace StansAssets.MarkingMenuB
 
             if (s_MarkingMenu.Active)
             {
-                var sceneView = SceneView.lastActiveSceneView;
                 Rect cursorRect = new Rect(0, 0, sceneView.camera.pixelWidth, sceneView.camera.pixelHeight);
                 EditorGUIUtility.AddCursorRect(cursorRect, UnityEditor.MouseCursor.Arrow);
             }

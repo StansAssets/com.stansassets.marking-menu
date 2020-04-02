@@ -1,2 +1,25 @@
 .markingMenuItemAdapter {
+    -unity-text-align: upper-center;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.markingMenuItemAdapter:hover .unity-label {
+}
+
+.markingMenuItemAdapter:hover {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgba(0, 255, 245, 255);
+    border-right-color: rgba(0, 255, 245, 255);
+    border-top-color: rgba(0, 255, 245, 255);
+    border-bottom-color: rgba(0, 255, 245, 255);
 }

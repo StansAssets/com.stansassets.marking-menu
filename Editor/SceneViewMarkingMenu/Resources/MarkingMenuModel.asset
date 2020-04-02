@@ -18,22 +18,22 @@ MonoBehaviour:
     Size: {x: 100, y: 20}
     Pivot: {x: 0.5, y: 0.5}
     Type: 0
-    CustomItemId: 
+    CustomItemId: Action1
   - DisplayName: Item 2
     RelativePosition: {x: 0, y: 40}
     Size: {x: 100, y: 20}
     Pivot: {x: 0.5, y: 0.5}
     Type: 0
-    CustomItemId: 
+    CustomItemId: Action2
   - DisplayName: Item 3
     RelativePosition: {x: 110, y: 0}
     Size: {x: 100, y: 20}
     Pivot: {x: 0.5, y: 0.5}
     Type: 0
-    CustomItemId: 
+    CustomItemId: Action3
   - DisplayName: Item 4
     RelativePosition: {x: -110, y: 0}
     Size: {x: 100, y: 20}
     Pivot: {x: 0.5, y: 0.5}
     Type: 0
-    CustomItemId: 
+    CustomItemId: Action4

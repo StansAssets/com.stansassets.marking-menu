@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace StansAssets.MarkingMenuB
+namespace StansAssets.MarkingMenu
 {
     public class MarkingMenuModel : ScriptableObject
     {

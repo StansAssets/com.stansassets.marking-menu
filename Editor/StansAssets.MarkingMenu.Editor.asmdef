@@ -1,7 +1,9 @@
 {
     "name": "StansAssets.MarkingMenu.Editor",
     "references": [
-        "GUID:bb925125ab82b4618a52d7d9c582ecf8"
+        "GUID:bb925125ab82b4618a52d7d9c582ecf8",
+        "GUID:db0eb1f6c1244402aa4d287a997cdb47",
+        "GUID:e322f1a843d5b4f8095d71c70e5fbccc"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

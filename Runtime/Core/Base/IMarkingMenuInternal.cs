@@ -1,6 +1,8 @@
-﻿namespace StansAssets.MarkingMenuB {
+﻿using System;
+
+namespace StansAssets.MarkingMenu {
     interface IMarkingMenuInternal : IMarkingMenu
     {
-        IMarkingMenuDisplayContext DisplayContext { get; }
+
     }
 }

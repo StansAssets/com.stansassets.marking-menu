@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StansAssets.MarkingMenuB
+namespace StansAssets.MarkingMenu
 {
     public enum ItemType
     {

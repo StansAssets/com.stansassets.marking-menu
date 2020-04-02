@@ -1,13 +1,12 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
-namespace StansAssets.MarkingMenuB
+namespace StansAssets.MarkingMenu
 {
-    public class BaseEditorActions : IMarkingMenuActionRegistrationListener
+    [CustomActionRegistration(true)] [UsedImplicitly]
+    public class BaseEditorActions
     {
-        public bool Enabled => true;
-
-        // [ActionItemAttribute()]
-        public void Register(IMarkingMenu menu)
+        public static void Register(IMarkingMenu menu)
         {
             menu.Register("Action1", () => Debug.Log("Action1 executed!"));
             menu.Register("Action2", () => Debug.Log("Action2 executed!"));
