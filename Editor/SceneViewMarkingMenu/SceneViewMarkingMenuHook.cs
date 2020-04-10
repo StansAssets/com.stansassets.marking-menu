@@ -24,7 +24,7 @@ namespace StansAssets.MarkingMenu
             s_MarkingMenu?.Close();
 
             var model = Resources.Load("MarkingMenuModel") as MarkingMenuModel;
-            s_MarkingMenu = MarkingMenuService.CreateMenu();
+            s_MarkingMenu = new MarkingMenu();
             // Prevent default event handle
             s_MarkingMenu.Root.RegisterCallback<MouseUpEvent>((args) =>
             {
@@ -66,6 +66,12 @@ namespace StansAssets.MarkingMenu
         {
             if (s_MarkingMenu != null)
             {
+                // Set mouse position manually for SceneView because Unity Editor steals events
+                if (Event.current.type == EventType.Repaint)
+                {
+                    s_MarkingMenu.SetMousePosition(Event.current.mousePosition);
+                }
+
                 HandleInput(sceneView);
             }
         }
@@ -82,24 +88,23 @@ namespace StansAssets.MarkingMenu
                     {
                         s_MouseDownContext = new MouseDownContext(true, e.mousePosition);
                     }
+                    else
+                    {
+                        s_MouseDownContext = new MouseDownContext(false, e.mousePosition);
+                    }
                     break;
 
                 case EventType.MouseUp:
                     var visualElementEvent = UIElementsUtility.CreateEvent(e);
                     s_MarkingMenu.SendEvent(visualElementEvent);
-                    // s_MouseDownContext = new MouseDownContext(false, Vector2.zero);
-                    // if (s_MarkingMenu.Active)
-                    // {
-                    //     s_MarkingMenu.Close();
-                    // }
                     break;
 
                 case EventType.MouseDrag:
                     e.Use();
 
-                    if (s_MarkingMenu.Active == false && s_MouseDownContext.IsMouseDown)
+                    if (s_MarkingMenu.Active == false)
                     {
-                        if ((s_MouseDownContext.Position - e.mousePosition).sqrMagnitude > 25)
+                        if (s_MouseDownContext.IsMouseDown && (s_MouseDownContext.Position - e.mousePosition).sqrMagnitude > 25)
                         {
                             s_MarkingMenu.Open(sceneView.rootVisualElement, s_MouseDownContext.Position);
                         }

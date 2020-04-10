@@ -12,27 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 879c82a3906c475483e096e91a6cfebc, type: 3}
   m_Name: MarkingMenuModel
   m_EditorClassIdentifier: 
+  AngleSelectionDeadZone: 35
+  MaxSelectableAngle: 40
   Items:
-  - DisplayName: Item 1
-    RelativePosition: {x: 0, y: -40}
+  - DisplayName: Play
+    RelativePosition: {x: 0, y: -60}
     Size: {x: 100, y: 20}
     Pivot: {x: 0.5, y: 0.5}
     Type: 0
     CustomItemId: Action1
-  - DisplayName: Item 2
-    RelativePosition: {x: 0, y: 40}
+  - DisplayName: Exit
+    RelativePosition: {x: 0, y: 60}
     Size: {x: 100, y: 20}
     Pivot: {x: 0.5, y: 0.5}
     Type: 0
     CustomItemId: Action2
-  - DisplayName: Item 3
-    RelativePosition: {x: 110, y: 0}
+  - DisplayName: Beep
+    RelativePosition: {x: 130, y: 0}
     Size: {x: 100, y: 20}
     Pivot: {x: 0.5, y: 0.5}
     Type: 0
     CustomItemId: Action3
-  - DisplayName: Item 4
-    RelativePosition: {x: -110, y: 0}
+  - DisplayName: Ping
+    RelativePosition: {x: -130, y: 0}
     Size: {x: 100, y: 20}
     Pivot: {x: 0.5, y: 0.5}
     Type: 0
