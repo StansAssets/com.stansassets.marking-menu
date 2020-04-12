@@ -70,7 +70,7 @@ namespace StansAssets.MarkingMenu
 
         public void SetHighlight(bool highlighted)
         {
-            var newState = highlighted ? VisualElementExtension.PseudoStates.Hover : VisualElementExtension.PseudoStates.Root;
+            var newState = highlighted ? PseudoStates.Hover : PseudoStates.Root;
             var currentState = VisualElement[0].GetPseudoState();
             if (newState != currentState)
             {
