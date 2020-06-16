@@ -14,8 +14,11 @@ namespace StansAssets.MarkingMenu
 
         static SceneViewMarkingMenuHook()
         {
-            Refresh();
-            SceneView.duringSceneGui += SceneViewOnDuringSceneGui;
+            EditorApplication.delayCall += () =>
+            {
+                Refresh();
+                SceneView.duringSceneGui += SceneViewOnDuringSceneGui;
+            };
         }
 
         [MenuItem("Stans Assets/Marking Menu/Refresh")]
