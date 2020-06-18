@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
 using StansAssets.Foundation.UIElements;
+using UnityEditor;
 
 namespace StansAssets.MarkingMenu
 {
     abstract class MarkingMenuItem
     {
         protected const string k_DefaultItemUxmlName = "MarkingMenuItemAdapter";
+        protected const string k_DefaultItemUssName = "MarkingMenuItemAdapter";
+        protected const string k_ProItemUssName = "MarkingMenuItemAdapterPro";
 
         protected VisualElement m_RootElement;
         protected Vector2 m_CenterPosition;
@@ -17,6 +20,8 @@ namespace StansAssets.MarkingMenu
         public MarkingMenuItemModel Model { get; }
         public VisualElement VisualElement { get; }
         public bool MouseOver => m_MouseOver;
+
+        protected Label m_VisualElementName;
 
         Vector2 Position
         {
@@ -30,13 +35,20 @@ namespace StansAssets.MarkingMenu
 
             var visualAsset = Resources.Load<VisualTreeAsset>(k_DefaultItemUxmlName);
             VisualElement = visualAsset.CloneTree();
-            VisualElement.Q<Label>().text = Model.DisplayName;
-            VisualElement.Q<Label>().pickingMode = PickingMode.Ignore;
+            m_VisualElementName = VisualElement.Q<Label>("markingMenuItemAdapterName");
+            m_VisualElementName.text = Model.DisplayName;
+            m_VisualElementName.pickingMode = PickingMode.Ignore;
         }
 
-        public void Enable(VisualElement rootElement, Vector2 center)
+        public virtual void Enable(VisualElement rootElement, Vector2 center)
         {
             m_RootElement = rootElement;
+            
+           // var ussName  = EditorGUIUtility.isProSkin ? k_ProItemUssName : k_DefaultItemUssName;
+            var ussName = k_ProItemUssName;
+            var stylesheet = Resources.Load<StyleSheet>(ussName);
+            m_RootElement.styleSheets.Add(stylesheet);
+            
             m_CenterPosition = center;
             m_MouseOver = false;
 
@@ -57,12 +69,13 @@ namespace StansAssets.MarkingMenu
         }
 
         public abstract void Execute();
+
         public bool MouseOverItem()
         {
             return m_MouseOver;
         }
 
-        public void UpdateDataFromModel()
+        public virtual void UpdateDataFromModel()
         {
             VisualElement.transform.position = Position;
             VisualElement.Q<Label>().text = Model.DisplayName;

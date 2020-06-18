@@ -24,10 +24,18 @@
                     {
                         ctx.ActionsCreated += 1;
                     }
+
                     return actionItem;
 
-                //case ItemType.Toggle:
-                //break;
+                case ItemType.Toggle:
+                    var state = ctx.MarkingMenu.m_Toggles[model.CustomItemId].Get();
+                    ToggleItem toggleItem = new ToggleItem(model, state);
+                    if (ctx.MarkingMenu.TryRegisterToggleItem(toggleItem))
+                    {
+                        ctx.ActionsCreated += 1;
+                    }
+
+                    return toggleItem;
 
                 //case ItemType.Menu:
                 //break;
