@@ -27,9 +27,9 @@
 }
 
 .label-on {
-    color: rgb(196, 232, 225);
+    color: rgb(71, 139, 44);
 }
 
 .label-off {
-    color: rgb(230, 187, 157);
+    color: rgb(230, 95, 61);
 }
