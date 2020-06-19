@@ -8,43 +8,41 @@ namespace StansAssets.MarkingMenu
     abstract class MarkingMenuItem
     {
         protected const string k_DefaultItemUxmlName = "MarkingMenuItemAdapter";
-        protected const string k_DefaultItemUssName = "MarkingMenuItemAdapter";
+        protected const string k_DefaultItemUssName = "MarkingMenuItemAdapterPersonal";
         protected const string k_ProItemUssName = "MarkingMenuItemAdapterPro";
 
         protected VisualElement m_RootElement;
         protected Vector2 m_CenterPosition;
         protected bool m_MouseOver;
-
-        public int Id { get; }
+        
         public string DisplayName => Model.DisplayName;
         public MarkingMenuItemModel Model { get; }
         public VisualElement VisualElement { get; }
         public bool MouseOver => m_MouseOver;
 
-        protected Label m_VisualElementName;
+        protected readonly Label m_MenuItemLabel;
+        protected readonly VisualElement m_MenuItemContainer;
 
-        Vector2 Position
-        {
-            get { return new Vector2(m_CenterPosition.x + Model.RelativePosition.x - Model.Pivot.x * 80f, m_CenterPosition.y + Model.RelativePosition.y + Model.Pivot.y * 20f); }
-        }
+        Vector2 Position => new Vector2(m_CenterPosition.x + Model.RelativePosition.x - Model.Pivot.x * m_MenuItemContainer.layout.x , m_CenterPosition.y + Model.RelativePosition.y + Model.Pivot.y * m_MenuItemContainer.layout.y);
 
         protected MarkingMenuItem(int id, MarkingMenuItemModel model)
         {
-            Id = id;
             Model = model;
 
             var visualAsset = Resources.Load<VisualTreeAsset>(k_DefaultItemUxmlName);
             VisualElement = visualAsset.CloneTree();
-            m_VisualElementName = VisualElement.Q<Label>("markingMenuItemAdapterName");
-            m_VisualElementName.text = Model.DisplayName;
-            m_VisualElementName.pickingMode = PickingMode.Ignore;
+            m_MenuItemLabel = VisualElement.Q<Label>("markingMenuItemAdapterName");
+            m_MenuItemContainer = VisualElement.Q<VisualElement>("markingMenuItemAdapter");
+            m_MenuItemLabel.text = Model.DisplayName;
+            m_MenuItemLabel.pickingMode = PickingMode.Ignore;
         }
 
         public void Enable(VisualElement rootElement, Vector2 center)
         {
             m_RootElement = rootElement;
             
-            var ussName  = EditorGUIUtility.isProSkin ? k_ProItemUssName : k_DefaultItemUssName;
+            //var ussName  = EditorGUIUtility.isProSkin ? k_ProItemUssName : k_DefaultItemUssName;
+            var ussName = k_DefaultItemUssName;
             var stylesheet = Resources.Load<StyleSheet>(ussName);
             m_RootElement.styleSheets.Add(stylesheet);
             

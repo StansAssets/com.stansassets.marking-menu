@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement class="markingMenuItemAdapter">
-        <ui:Label text="Item" class="markingMenuItemAdapter-label" name="markingMenuItemAdapterName"/>
+    <ui:VisualElement name="markingMenuItemAdapter" class="markingMenuItemAdapter">
+        <ui:Label text="Item" name="markingMenuItemAdapterName" class="markingMenuItemAdapter-label"/>
     </ui:VisualElement>
 </ui:UXML>

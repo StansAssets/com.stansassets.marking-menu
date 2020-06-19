@@ -19,7 +19,7 @@
             switch (model.Type)
             {
                 case ItemType.Action:
-                    ActionItem actionItem = new ActionItem(model);
+                    var actionItem = new ActionItem(model);
                     if (ctx.MarkingMenu.TryRegisterActionItem(actionItem))
                     {
                         ctx.ActionsCreated += 1;
@@ -28,8 +28,8 @@
                     return actionItem;
 
                 case ItemType.Toggle:
-                    var state = ctx.MarkingMenu.m_Toggles[model.CustomItemId].Get();
-                    ToggleItem toggleItem = new ToggleItem(model, state);
+                    var toggleContext = ctx.MarkingMenu.TryGetToggleContext(model.CustomItemId);
+                    var toggleItem = new ToggleItem(model, toggleContext.Get());
                     if (ctx.MarkingMenu.TryRegisterToggleItem(toggleItem))
                     {
                         ctx.ActionsCreated += 1;

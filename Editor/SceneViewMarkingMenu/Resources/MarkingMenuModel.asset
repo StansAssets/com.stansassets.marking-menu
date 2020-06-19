@@ -35,7 +35,7 @@ MonoBehaviour:
     Pivot: {x: 0.5, y: 0.5}
     Type: 0
     CustomItemId: Action4
-  - DisplayName: Ping123
+  - DisplayName: isPlaying
     RelativePosition: {x: -130, y: -30}
     Pivot: {x: 0.5, y: 0.5}
     Type: 1

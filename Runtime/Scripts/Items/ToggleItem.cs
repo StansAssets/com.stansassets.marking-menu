@@ -10,21 +10,24 @@ namespace StansAssets.MarkingMenu
         public event Action<ItemExecutedEventArgs> OnItemExecuted;
         readonly string m_ActionId;
         bool m_State;
-        const string k_On = " (ON)";
-        const string k_Off = " (OFF)";
+        const string k_LabelPrefixOn = " (ON)";
+        const string k_LabelPrefixOff = " (OFF)";
+        const string k_LabelStyleOn = "label-on";
+        const string k_LabelStyleOff = "label-off";
+        const string k_LabelStyleDefault = "markingMenuItemAdapter-label";
 
         public ToggleItem(MarkingMenuItemModel model, bool state)
             : base(model.GetHashCode(), model)
         {
             m_ActionId = model.CustomItemId;
             m_State = state;
-            StatusChangeVisualization(m_State);
+            UpdateUIByState(m_State);
         }
         
         public override void Execute()
         {
             m_State = !m_State;
-            StatusChangeVisualization(m_State);
+            UpdateUIByState(m_State);
             OnItemExecuted?.Invoke(new ItemExecutedEventArgs()
             {
                 Id = m_ActionId,
@@ -36,27 +39,27 @@ namespace StansAssets.MarkingMenu
         public override void UpdateDataFromModel()
         {
             base.UpdateDataFromModel();
-            StatusChangeVisualization(m_State);
+            UpdateUIByState(m_State);
         }
 
-        void StatusChangeVisualization(bool state)
+        void UpdateUIByState(bool state)
         {
-            m_VisualElementName.ClearClassList();
-            m_VisualElementName.AddToClassList("markingMenuItemAdapter-label");
+            m_MenuItemLabel.ClearClassList();
+            m_MenuItemLabel.AddToClassList(k_LabelStyleDefault);
             var style = "";
             var prefix = "";
             if (state)
             {
-                style = "label-on";
-                prefix = k_On;
+                style = k_LabelStyleOn;
+                prefix = k_LabelPrefixOn;
             }
             else
             {
-                style = "label-off";
-                prefix = k_Off;
+                style = k_LabelStyleOff;
+                prefix = k_LabelPrefixOff;
             }
-            m_VisualElementName.AddToClassList(style);
-            m_VisualElementName.text = Model.DisplayName + prefix;
+            m_MenuItemLabel.AddToClassList(style);
+            m_MenuItemLabel.text = Model.DisplayName + prefix;
         }
     }
 }

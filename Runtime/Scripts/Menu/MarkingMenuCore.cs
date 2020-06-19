@@ -9,7 +9,7 @@ namespace StansAssets.MarkingMenu
     public partial class MarkingMenu
     {
         readonly Dictionary<string, Action> m_Actions = new Dictionary<string, Action>();
-        internal readonly Dictionary<string, ToggleContext> m_Toggles = new Dictionary<string, ToggleContext>();
+        readonly Dictionary<string, ToggleContext> m_Toggles = new Dictionary<string, ToggleContext>();
 
         MarkingMenuModel m_Model;
         readonly List<MarkingMenuItem> m_Items = new List<MarkingMenuItem>(10);
@@ -85,6 +85,20 @@ namespace StansAssets.MarkingMenu
             }
 
             return true;
+        }
+
+        internal ToggleContext TryGetToggleContext(string key)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentException($"Item {key} has Action type but CustomItemId is null or empty!");
+            }
+            if (m_Toggles.ContainsKey(key) == false)
+            {
+                throw new ArgumentException($"Registration for action with id \"{key}\" not found!");
+            }
+
+            return m_Toggles[key];
         }
 
         void EnableItems(VisualElement root, Vector2 center)
