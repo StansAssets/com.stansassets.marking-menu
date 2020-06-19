@@ -1,6 +1,5 @@
 .markingMenuItemAdapter {
     position: absolute;
-    margin: 3px 15px 3px 15px;
     -unity-text-align: upper-center;
     border-width: 1px;
     border-left-color: rgba(178, 178, 178, 255);
@@ -15,7 +14,7 @@
     visibility: visible;
     overflow: visible;
     color: rgba(0, 0, 0, 255);
-    margin: 1px 25px 1px 25px;
+    margin: 1px 20px 1px 20px;
 }
 
 .markingMenuItemAdapter:hover .unity-label {

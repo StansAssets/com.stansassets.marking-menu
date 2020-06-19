@@ -21,11 +21,6 @@ namespace StansAssets.MarkingMenu
             StatusChangeVisualization(m_State);
         }
         
-        public override void Enable(VisualElement rootElement, Vector2 center)
-        {
-            base.Enable(rootElement, center);
-        }
-
         public override void Execute()
         {
             m_State = !m_State;

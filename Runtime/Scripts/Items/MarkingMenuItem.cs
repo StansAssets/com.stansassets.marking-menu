@@ -25,7 +25,7 @@ namespace StansAssets.MarkingMenu
 
         Vector2 Position
         {
-            get { return new Vector2(m_CenterPosition.x + Model.RelativePosition.x - Model.Pivot.x * Model.Size.x, m_CenterPosition.y + Model.RelativePosition.y + Model.Pivot.y * Model.Size.y); }
+            get { return new Vector2(m_CenterPosition.x + Model.RelativePosition.x - Model.Pivot.x * 80f, m_CenterPosition.y + Model.RelativePosition.y + Model.Pivot.y * 20f); }
         }
 
         protected MarkingMenuItem(int id, MarkingMenuItemModel model)
@@ -40,12 +40,11 @@ namespace StansAssets.MarkingMenu
             m_VisualElementName.pickingMode = PickingMode.Ignore;
         }
 
-        public virtual void Enable(VisualElement rootElement, Vector2 center)
+        public void Enable(VisualElement rootElement, Vector2 center)
         {
             m_RootElement = rootElement;
             
-           // var ussName  = EditorGUIUtility.isProSkin ? k_ProItemUssName : k_DefaultItemUssName;
-            var ussName = k_ProItemUssName;
+            var ussName  = EditorGUIUtility.isProSkin ? k_ProItemUssName : k_DefaultItemUssName;
             var stylesheet = Resources.Load<StyleSheet>(ussName);
             m_RootElement.styleSheets.Add(stylesheet);
             
