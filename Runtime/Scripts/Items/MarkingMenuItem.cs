@@ -23,7 +23,7 @@ namespace StansAssets.MarkingMenu
         protected readonly Label m_MenuItemLabel;
         protected readonly VisualElement m_MenuItemContainer;
 
-        Vector2 Position => new Vector2(m_CenterPosition.x + Model.RelativePosition.x - Model.Pivot.x * m_MenuItemContainer.layout.x , m_CenterPosition.y + Model.RelativePosition.y + Model.Pivot.y * m_MenuItemContainer.layout.y);
+        Vector2 Position => new Vector2(m_CenterPosition.x + Model.RelativePosition.x - Model.Pivot.x * Model.Size.x , m_CenterPosition.y + Model.RelativePosition.y + Model.Pivot.y * Model.Size.y);
 
         protected MarkingMenuItem(int id, MarkingMenuItemModel model)
         {
@@ -41,10 +41,11 @@ namespace StansAssets.MarkingMenu
         {
             m_RootElement = rootElement;
             
-            //var ussName  = EditorGUIUtility.isProSkin ? k_ProItemUssName : k_DefaultItemUssName;
-            var ussName = k_DefaultItemUssName;
+            var ussName  = EditorGUIUtility.isProSkin ? k_ProItemUssName : k_DefaultItemUssName;
             var stylesheet = Resources.Load<StyleSheet>(ussName);
-            m_RootElement.styleSheets.Add(stylesheet);
+            VisualElement.styleSheets.Add(stylesheet);
+            m_MenuItemContainer.style.height = Model.Size.y;
+            m_MenuItemContainer.style.width = Model.Size.x;
             
             m_CenterPosition = center;
             m_MouseOver = false;
@@ -74,8 +75,9 @@ namespace StansAssets.MarkingMenu
 
         public virtual void UpdateDataFromModel()
         {
+            
             VisualElement.transform.position = Position;
-            VisualElement.Q<Label>().text = Model.DisplayName;
+            m_MenuItemLabel.text = Model.DisplayName;
         }
 
         public void SetHighlight(bool highlighted)
