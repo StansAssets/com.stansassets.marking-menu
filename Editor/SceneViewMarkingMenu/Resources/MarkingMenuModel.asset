@@ -45,3 +45,9 @@ MonoBehaviour:
     Pivot: {x: 0.5, y: 0.5}
     Type: 1
     CustomItemId: Action5
+  - DisplayName: State
+    RelativePosition: {x: 200, y: 30}
+    Size: {x: 150, y: 50}
+    Pivot: {x: 0.5, y: 0.5}
+    Type: 2
+    CustomItemId: Action6

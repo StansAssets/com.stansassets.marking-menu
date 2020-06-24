@@ -37,8 +37,15 @@
 
                     return toggleItem;
 
-                //case ItemType.Menu:
-                //break;
+                case ItemType.Menu:
+                    var toggleMenuContext = ctx.MarkingMenu.TryGetToggleMenuContext(model.CustomItemId);
+                    var toggleMenuItem = new ToggleMenuItem(model, toggleMenuContext.Get());
+                    if (ctx.MarkingMenu.TryRegisterToggleMenuItem(toggleMenuItem))
+                    {
+                        ctx.ActionsCreated += 1;
+                    }
+
+                    return toggleMenuItem;
             }
 
             return null;

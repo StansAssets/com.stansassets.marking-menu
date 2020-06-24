@@ -1,5 +1,8 @@
 .markingMenuItemAdapter {
     position: absolute;
+}
+
+.markingMenuItemAdapter-button {
     -unity-text-align: upper-center;
     border-width: 1px;
     border-left-color: rgba(178, 178, 178, 255);
@@ -16,13 +19,10 @@
     color: rgba(0, 0, 0, 255);
 }
 
-.markingMenuItemAdapter:hover .unity-label {
-}
-
-.markingMenuItemAdapter:hover {
+.markingMenuItemAdapter-button:hover {
     background-image: none;
-    border-color: rgba(60, 127, 223, 1);
-    background-color: rgba(60, 127, 223, 1);
+    border-color: rgb(144, 180, 223);
+    background-color: rgb(144, 180, 223);
 }
 
 .label-on {
@@ -31,4 +31,32 @@
 
 .label-off {
     color: rgb(230, 95, 61);
+}
+
+.markingMenuItemAdapter-menu {
+    display: none;
+    background-color: rgb(228, 228, 228);
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.markingMenuItemAdapter-menu-item {
+    border-width: 2px;
+    -unity-text-align: upper-center;
+    border-color: rgba(60, 127, 223, 1);
+    background-color: rgba(60, 127, 223, 1);
+    border-radius: 10px;
+    padding: 0 3px 0 3px;
+    margin: 2px;
+    height: 20px;
+}
+
+.markingMenuItemAdapter-menu-item:hover {
+    border-color: rgba(0, 0, 0, 255);
+    background-color: rgb(144, 180, 223);
+}
+
+.markingMenuItemAdapter-menu-item-active {
+    border-color: rgb(144, 180, 223);
+    background-color: rgb(144, 180, 223);
 }

@@ -78,6 +78,16 @@ namespace StansAssets.MarkingMenu
 
             m_Toggles[id] = ctx;
         }
+        public void Register(string id, ToggleMenuContext ctx)
+        {
+            if (m_Actions.ContainsKey(id))
+            {
+                Debug.LogError($"ToggleMenuContext with id: {id} is already added!");
+                return;
+            }
+
+            m_ToggleMenus[id] = ctx;
+        }
 #if UNITY_EDITOR
         public void SetMousePosition(Vector2 mousePosition)
         {
