@@ -43,20 +43,20 @@
     border-width: 1px;
     -unity-text-align: upper-center;
     color: rgb(255, 255, 255);
-    border-color: rgb(16, 46, 223);
-    background-color: rgb(16, 46, 223);
+    border-color: rgb(21, 41, 71);
+    background-color: rgb(21, 41, 71);
     border-radius: 10px;
     padding: 0 3px 0 3px;
     margin: 2px;
-    height: 20px;
+    height: 18px;
 }
 
 .markingMenuItemAdapter-menu-item:hover {
     border-color: rgb(255, 255, 255);
-    background-color: rgba(60, 127, 223, 1);
+    background-color: rgb(33, 73, 127);
 }
 
 .markingMenuItemAdapter-menu-item-active {
-    border-color: rgba(60, 127, 223, 1);
-    background-color: rgba(60, 127, 223, 1);
+    border-color: rgb(33, 73, 127);
+    background-color: rgb(33, 73, 127);
 }

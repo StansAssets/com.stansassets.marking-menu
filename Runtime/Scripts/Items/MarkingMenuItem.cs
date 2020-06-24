@@ -41,8 +41,7 @@ namespace StansAssets.MarkingMenu
         {
             m_RootElement = rootElement;
             
-            //var ussName  = EditorGUIUtility.isProSkin ? k_ProItemUssName : k_DefaultItemUssName;
-            var ussName = k_DefaultItemUssName;
+            var ussName  = EditorGUIUtility.isProSkin ? k_ProItemUssName : k_DefaultItemUssName;
             var stylesheet = Resources.Load<StyleSheet>(ussName);
             VisualElement.styleSheets.Add(stylesheet);
             m_MenuItemContainer.style.height = Model.Size.y;
