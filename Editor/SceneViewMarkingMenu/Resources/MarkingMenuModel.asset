@@ -17,25 +17,37 @@ MonoBehaviour:
   Items:
   - DisplayName: Play
     RelativePosition: {x: 0, y: -60}
-    Size: {x: 100, y: 20}
+    Size: {x: 80, y: 20}
     Pivot: {x: 0.5, y: 0.5}
     Type: 0
     CustomItemId: Action1
   - DisplayName: Exit
     RelativePosition: {x: 0, y: 60}
-    Size: {x: 100, y: 20}
+    Size: {x: 80, y: 20}
     Pivot: {x: 0.5, y: 0.5}
     Type: 0
     CustomItemId: Action2
   - DisplayName: Beep
     RelativePosition: {x: 130, y: 0}
-    Size: {x: 100, y: 20}
+    Size: {x: 80, y: 20}
     Pivot: {x: 0.5, y: 0.5}
     Type: 0
     CustomItemId: Action3
   - DisplayName: Ping
     RelativePosition: {x: -130, y: 0}
-    Size: {x: 100, y: 20}
+    Size: {x: 80, y: 20}
     Pivot: {x: 0.5, y: 0.5}
     Type: 0
     CustomItemId: Action4
+  - DisplayName: isPlaying
+    RelativePosition: {x: -130, y: -30}
+    Size: {x: 100, y: 20}
+    Pivot: {x: 0.5, y: 0.5}
+    Type: 1
+    CustomItemId: Action5
+  - DisplayName: State
+    RelativePosition: {x: 200, y: 30}
+    Size: {x: 155, y: 50}
+    Pivot: {x: 0.5, y: 0.5}
+    Type: 2
+    CustomItemId: Action6

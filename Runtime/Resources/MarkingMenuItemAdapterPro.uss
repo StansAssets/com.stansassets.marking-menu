@@ -1,0 +1,62 @@
+.markingMenuItemAdapter {
+    position: absolute;
+}
+
+.markingMenuItemAdapter-button {
+    -unity-text-align: upper-center;
+    border-width: 1px;
+    border-left-color: rgb(56, 56, 56);
+    border-right-color: rgb(56, 56, 56);
+    border-top-color: rgb(56, 56, 56);
+    border-bottom-color: rgb(22, 22, 22);
+    background-image: url('ButtonBackPro.png');
+}
+
+.markingMenuItemAdapter-label {
+    visibility: visible;
+    overflow: visible;
+    color: rgb(255, 255, 255);
+}
+
+.markingMenuItemAdapter-button:hover {
+    background-image: none;
+    border-color: rgba(60, 127, 223, 1);
+    background-color: rgba(60, 127, 223, 1);
+}
+
+.label-on {
+    color: rgb(196, 232, 225);
+}
+
+.label-off {
+    color: rgb(230, 187, 157);
+}
+
+.markingMenuItemAdapter-menu {
+    display: none;
+    background-color: rgb(56, 56, 56);
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.markingMenuItemAdapter-menu-item {
+    border-width: 1px;
+    -unity-text-align: upper-center;
+    color: rgb(255, 255, 255);
+    border-color: rgb(21, 41, 71);
+    background-color: rgb(21, 41, 71);
+    border-radius: 10px;
+    padding: 0 3px 0 3px;
+    margin: 2px;
+    height: 18px;
+}
+
+.markingMenuItemAdapter-menu-item:hover {
+    border-color: rgb(255, 255, 255);
+    background-color: rgb(33, 73, 127);
+}
+
+.markingMenuItemAdapter-menu-item-active {
+    border-color: rgb(33, 73, 127);
+    background-color: rgb(33, 73, 127);
+}

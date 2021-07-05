@@ -1,6 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement class="markingMenuItemAdapter" style="width: 100px;&#10;height: 20px;&#10;position: absolute;&#10;background-color: rgb(190, 190, 190);&#10;">
-        <Style src="MarkingMenuItemAdapter.uss" />
-        <ui:Label text="Item" style="visibility: visible;&#10;overflow: visible;&#10;color: rgba(0, 0, 0, 255);&#10;" />
+    <ui:VisualElement name="markingMenuItemAdapter" class="markingMenuItemAdapter">
+        <ui:VisualElement name="markingMenuItemAdapterButton" class="markingMenuItemAdapter-button">
+            <ui:Label text="Item" name="markingMenuItemAdapterName" class="markingMenuItemAdapter-label"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="markingMenuItemAdapterMenu" class="markingMenuItemAdapter-menu"/>
     </ui:VisualElement>
 </ui:UXML>

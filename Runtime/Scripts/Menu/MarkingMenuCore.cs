@@ -10,6 +10,7 @@ namespace StansAssets.MarkingMenu
     {
         readonly Dictionary<string, Action> m_Actions = new Dictionary<string, Action>();
         readonly Dictionary<string, ToggleContext> m_Toggles = new Dictionary<string, ToggleContext>();
+        readonly Dictionary<string, ToggleMenuContext> m_ToggleMenus = new Dictionary<string, ToggleMenuContext>();
 
         MarkingMenuModel m_Model;
         readonly List<MarkingMenuItem> m_Items = new List<MarkingMenuItem>(10);
@@ -70,6 +71,66 @@ namespace StansAssets.MarkingMenu
 
             return true;
         }
+        
+        internal bool TryRegisterToggleItem(ToggleItem item)
+        {
+            item.OnItemExecuted += OnItemExecutedHandler;
+
+            if (string.IsNullOrEmpty(item.Model.CustomItemId))
+            {
+                throw new ArgumentException($"Item {item.Model.DisplayName} has Action type but CustomItemId is null or empty!");
+            }
+            else if (m_Toggles.ContainsKey(item.Model.CustomItemId) == false)
+            {
+                throw new ArgumentException($"Registration for action with id \"{item.Model.CustomItemId}\" not found!");
+            }
+
+            return true;
+        }
+        
+        internal bool TryRegisterToggleMenuItem(ToggleMenuItem item)
+        {
+            item.OnItemExecuted += OnItemExecutedHandler;
+
+            if (string.IsNullOrEmpty(item.Model.CustomItemId))
+            {
+                throw new ArgumentException($"Item {item.Model.DisplayName} has Action type but CustomItemId is null or empty!");
+            }
+            else if (m_ToggleMenus.ContainsKey(item.Model.CustomItemId) == false)
+            {
+                throw new ArgumentException($"Registration for action with id \"{item.Model.CustomItemId}\" not found!");
+            }
+
+            return true;
+        }
+        
+        internal ToggleMenuContext TryGetToggleMenuContext(string key)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentException($"Item {key} has Action type but CustomItemId is null or empty!");
+            }
+            if (m_ToggleMenus.ContainsKey(key) == false)
+            {
+                throw new ArgumentException($"Registration for action with id \"{key}\" not found!");
+            }
+
+            return m_ToggleMenus[key];
+        }
+
+        internal ToggleContext TryGetToggleContext(string key)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentException($"Item {key} has Action type but CustomItemId is null or empty!");
+            }
+            if (m_Toggles.ContainsKey(key) == false)
+            {
+                throw new ArgumentException($"Registration for action with id \"{key}\" not found!");
+            }
+
+            return m_Toggles[key];
+        }
 
         void EnableItems(VisualElement root, Vector2 center)
         {
@@ -121,6 +182,10 @@ namespace StansAssets.MarkingMenu
                 case ItemType.Toggle:
                     bool currentState = m_Toggles[args.Id].Get.Invoke();
                     m_Toggles[args.Id].Set.Invoke(!currentState);
+                    break;
+                case ItemType.Menu:
+                    var currentStateMenu = m_ToggleMenus[args.Id].Get.Invoke().CurrentItem;
+                    m_ToggleMenus[args.Id].Set.Invoke(currentStateMenu);
                     break;
             }
         }

@@ -8,6 +8,7 @@ namespace StansAssets.MarkingMenu
         internal string Id;
         internal ItemType Type;
         internal MarkingMenuItem Item;
+        internal string Value;
     }
 
     class ActionItem : MarkingMenuItem
