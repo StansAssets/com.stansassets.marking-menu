@@ -3,5 +3,8 @@
   "displayName": "Stans Assets - Marking Menu",
   "version": "0.0.1",
   "unity": "2020.1",
-  "description": "Marking Menu."
+  "description": "Marking Menu.",
+  "dependencies": {
+    "com.stansassets.plugins-dev-kit": "1.0.1"
+  }
 }

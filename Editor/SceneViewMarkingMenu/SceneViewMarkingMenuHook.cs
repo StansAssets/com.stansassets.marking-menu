@@ -21,7 +21,7 @@ namespace StansAssets.MarkingMenu
             };
         }
 
-        [MenuItem("Stans Assets/Marking Menu/Refresh")]
+        [MenuItem("Stan's Assets/Marking Menu/Refresh")]
         static void Refresh()
         {
             s_MarkingMenu?.Close();
@@ -87,13 +87,10 @@ namespace StansAssets.MarkingMenu
             switch (e.type)
             {
                 case EventType.MouseDown:
-                    if (e.button == 1)
+                    s_MouseDownContext = new MouseDownContext(e.button == 1, e.mousePosition);
+                    if (s_MouseDownContext.IsMouseDown)
                     {
-                        s_MouseDownContext = new MouseDownContext(true, e.mousePosition);
-                    }
-                    else
-                    {
-                        s_MouseDownContext = new MouseDownContext(false, e.mousePosition);
+                        s_MarkingMenu.Open(sceneView.rootVisualElement, s_MouseDownContext.Position);
                     }
                     break;
 
@@ -103,14 +100,9 @@ namespace StansAssets.MarkingMenu
                     break;
 
                 case EventType.MouseDrag:
-                    e.Use();
-
-                    if (s_MarkingMenu.Active == false)
+                    if (s_MarkingMenu.Active)
                     {
-                        if (s_MouseDownContext.IsMouseDown && (s_MouseDownContext.Position - e.mousePosition).sqrMagnitude > 25)
-                        {
-                            s_MarkingMenu.Open(sceneView.rootVisualElement, s_MouseDownContext.Position);
-                        }
+                        e.Use();
                     }
                     break;
             }
@@ -118,7 +110,7 @@ namespace StansAssets.MarkingMenu
             if (s_MarkingMenu.Active)
             {
                 Rect cursorRect = new Rect(0, 0, sceneView.camera.pixelWidth, sceneView.camera.pixelHeight);
-                EditorGUIUtility.AddCursorRect(cursorRect, UnityEditor.MouseCursor.Arrow);
+                EditorGUIUtility.AddCursorRect(cursorRect, MouseCursor.Arrow);
             }
 
             int controlId = GUIUtility.GetControlID(FocusType.Passive);

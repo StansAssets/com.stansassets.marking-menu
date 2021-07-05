@@ -33,10 +33,13 @@ namespace StansAssets.MarkingMenu
 
         void CloseCore()
         {
-            Active = false;
+            if (Active)
+            {
+                Parent.Remove(this);
+                DisableItems();
+            }
 
-            Parent.Remove(this);
-            DisableItems();
+            Active = false;
         }
 
         void CreateItems(MarkingMenuModel model)
