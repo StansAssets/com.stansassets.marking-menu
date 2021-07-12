@@ -91,17 +91,9 @@ namespace StansAssets.MarkingMenu
                     if (s_MouseDownContext.IsMouseDown)
                     {
                         s_MarkingMenu.Open(sceneView.rootVisualElement, s_MouseDownContext.Position);
-                    }
-                    break;
 
-                case EventType.MouseUp:
-                    var visualElementEvent = UIElementsUtility.CreateEvent(e);
-                    s_MarkingMenu.SendEvent(visualElementEvent);
-                    break;
-
-                case EventType.MouseDrag:
-                    if (s_MarkingMenu.Active)
-                    {
+                        // Mark event as used to allow the hovering UI elements by the cursor
+                        // Otherwise UI elements will ignore mouse cursor until user pressed 'left' mouse button
                         e.Use();
                     }
                     break;
