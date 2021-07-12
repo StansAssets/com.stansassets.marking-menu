@@ -97,12 +97,6 @@ namespace StansAssets.MarkingMenu
                         e.Use();
                     }
                     break;
-
-                case EventType.MouseUp:
-                    // TODO: Looks like 'EventType.MouseUp' is never called when 'EventType.MouseDown' is marked as 'used', 'EventType.ContextClick' is called instead.
-                    var visualElementEvent = UIElementsUtility.CreateEvent(e);
-                    s_MarkingMenu.SendEvent(visualElementEvent);
-                    break;
             }
 
             if (s_MarkingMenu.Active)
