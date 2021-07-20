@@ -19,6 +19,13 @@ namespace StansAssets.MarkingMenu {
         public const string USSClassName = "stansassets-markingmenu-visualelement";
 
         /// <summary>
+        /// Creates new MarkingMenuVisualElement.
+        /// </summary>
+        public MarkingMenuVisualElement() {
+            AddToClassList(USSClassName);
+        }
+        
+        /// <summary>
         /// Overriden method to extend area for OnMouseOver event. 
         /// </summary>
         /// <param name="point">Pointer position</param>
@@ -29,10 +36,6 @@ namespace StansAssets.MarkingMenu {
             }
 
             return this[0].GetPseudoState() == PseudoStates.Hover;
-        }
-
-        public MarkingMenuVisualElement() {
-            AddToClassList(USSClassName);
         }
     }
 }
