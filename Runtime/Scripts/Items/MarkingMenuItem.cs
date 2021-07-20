@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
+using System.Linq;
 using StansAssets.Foundation.UIElements;
 using UnityEditor;
 
@@ -17,7 +18,7 @@ namespace StansAssets.MarkingMenu
         
         public string DisplayName => Model.DisplayName;
         public MarkingMenuItemModel Model { get; }
-        public VisualElement VisualElement { get; }
+        public MarkingMenuVisualElement VisualElement { get; }
         public bool MouseOver => m_MouseOver;
 
         protected readonly Label m_MenuItemLabel;
@@ -30,7 +31,9 @@ namespace StansAssets.MarkingMenu
             Model = model;
 
             var visualAsset = Resources.Load<VisualTreeAsset>(k_DefaultItemUxmlName);
-            VisualElement = visualAsset.CloneTree();
+            // the first child - is a MarkingMenuVisualElement object with extended functionality
+            var firstChild = visualAsset.CloneTree().Children().First();
+            VisualElement = (MarkingMenuVisualElement)firstChild;
             m_MenuItemLabel = VisualElement.Q<Label>("markingMenuItemAdapterName");
             m_MenuItemContainer = VisualElement.Q<VisualElement>("markingMenuItemAdapter");
             m_MenuItemLabel.text = Model.DisplayName;
@@ -75,7 +78,6 @@ namespace StansAssets.MarkingMenu
 
         public virtual void UpdateDataFromModel()
         {
-            
             VisualElement.transform.position = Position;
             m_MenuItemLabel.text = Model.DisplayName;
         }
