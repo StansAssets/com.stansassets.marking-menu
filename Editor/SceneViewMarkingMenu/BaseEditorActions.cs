@@ -7,7 +7,7 @@ using UnityEngine;
 namespace StansAssets.MarkingMenu
 {
     [CustomActionRegistration(true)] [UsedImplicitly]
-    public class BaseEditorActions
+    public sealed class BaseEditorActions
     {
         static ItemType item = ItemType.Action;
 

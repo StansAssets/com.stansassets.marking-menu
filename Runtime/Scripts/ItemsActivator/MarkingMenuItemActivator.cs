@@ -1,4 +1,6 @@
-﻿namespace StansAssets.MarkingMenu
+﻿using System;
+
+namespace StansAssets.MarkingMenu
 {
     struct ItemCreationContext
     {
@@ -46,9 +48,9 @@
                     }
 
                     return toggleMenuItem;
+                default:
+                    return null;
             }
-
-            return null;
         }
     }
 }

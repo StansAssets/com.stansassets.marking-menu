@@ -67,7 +67,7 @@ namespace StansAssets.MarkingMenu
             {
                 throw new ArgumentException($"Item {item.Model.DisplayName} has Action type but CustomItemId is null or empty!");
             }
-            else if (m_Actions.ContainsKey(item.Model.CustomItemId) == false)
+            if (m_Actions.ContainsKey(item.Model.CustomItemId) == false)
             {
                 throw new ArgumentException($"Registration for action with id \"{item.Model.CustomItemId}\" not found!");
             }
@@ -83,7 +83,7 @@ namespace StansAssets.MarkingMenu
             {
                 throw new ArgumentException($"Item {item.Model.DisplayName} has Action type but CustomItemId is null or empty!");
             }
-            else if (m_Toggles.ContainsKey(item.Model.CustomItemId) == false)
+            if (m_Toggles.ContainsKey(item.Model.CustomItemId) == false)
             {
                 throw new ArgumentException($"Registration for action with id \"{item.Model.CustomItemId}\" not found!");
             }
@@ -99,7 +99,7 @@ namespace StansAssets.MarkingMenu
             {
                 throw new ArgumentException($"Item {item.Model.DisplayName} has Action type but CustomItemId is null or empty!");
             }
-            else if (m_ToggleMenus.ContainsKey(item.Model.CustomItemId) == false)
+            if (m_ToggleMenus.ContainsKey(item.Model.CustomItemId) == false)
             {
                 throw new ArgumentException($"Registration for action with id \"{item.Model.CustomItemId}\" not found!");
             }
@@ -171,7 +171,7 @@ namespace StansAssets.MarkingMenu
         // This callback is to link Items action Ids to actual Actions within registered ones in this class (Action, Toggles etc).
         void OnItemExecutedHandler(ItemExecutedEventArgs args)
         {
-            if (MarkingMenu.DebugMode)
+            if (DebugMode)
             {
                 Debug.Log($"Item with Id {args.Id} and Type {args.Type} executed!");
             }
@@ -190,6 +190,8 @@ namespace StansAssets.MarkingMenu
                     var currentStateMenu = m_ToggleMenus[args.Id].Get.Invoke().CurrentItem;
                     m_ToggleMenus[args.Id].Set.Invoke(currentStateMenu);
                     break;
+                default:
+                    throw new Exception("Unknown type of model can't be handled");
             }
         }
 

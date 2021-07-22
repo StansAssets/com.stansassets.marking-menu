@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace StansAssets.MarkingMenu {
+﻿namespace StansAssets.MarkingMenu {
     
     public class ToggleMenuContext
     {

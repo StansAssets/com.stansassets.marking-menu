@@ -26,6 +26,7 @@ namespace StansAssets.MarkingMenu
 
         Vector2 Position => new Vector2(m_CenterPosition.x + Model.RelativePosition.x - Model.Pivot.x * Model.Size.x , m_CenterPosition.y + Model.RelativePosition.y + Model.Pivot.y * Model.Size.y);
 
+        //TODO: check the redundant parameter usefulness
         protected MarkingMenuItem(int id, MarkingMenuItemModel model)
         {
             Model = model;

@@ -1,4 +1,3 @@
-﻿using StansAssets.Foundation.UIElements;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;

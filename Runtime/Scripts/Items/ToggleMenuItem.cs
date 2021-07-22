@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace StansAssets.MarkingMenu
@@ -12,7 +11,7 @@ namespace StansAssets.MarkingMenu
         readonly string m_ActionId;
         string m_CurrentItem;
         string m_LastMouseOverItem;
-        bool m_MouseOverItem = false;
+        bool m_MouseOverItem;
         
         protected const string k_LabelStyleItem = "markingMenuItemAdapter-menu-item";
         protected const string k_LabelStyleItemActive = "markingMenuItemAdapter-menu-item-active";
@@ -60,7 +59,7 @@ namespace StansAssets.MarkingMenu
 
         void MouseEnterEventItem(MouseEnterEvent ev)
         {
-            var el = (ev.target as Label);
+            var el = ev.target as Label;
             if (m_ToggleMenuItemsLabel.ContainsValue(el))
             {
                 m_LastMouseOverItem = m_ToggleMenuItemsLabel.FirstOrDefault(x => x.Value == el).Key;

@@ -1,7 +1,4 @@
 ﻿using System;
-using UnityEngine;
-using UnityEngine.UIElements;
-using StansAssets.Foundation.UIElements;
 
 namespace StansAssets.MarkingMenu
 {

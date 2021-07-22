@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace StansAssets.MarkingMenu
@@ -11,10 +8,11 @@ namespace StansAssets.MarkingMenu
         const int k_TextureSize = 16;
         Texture2D m_Texture;
         Vector2 m_MousePosition;
-        bool m_skipFirstGenerateVisualContext;
+        bool m_SkipFirstGenerateVisualContext;
 
         MarkingMenuItem AngleSelectionItem { get; set; }
 
+        // TODO: is model parameter needed?
         internal void InitVisual(MarkingMenuModel model)
         {
             m_Texture = new Texture2D(k_TextureSize, k_TextureSize)
@@ -25,6 +23,7 @@ namespace StansAssets.MarkingMenu
             generateVisualContent += OnGenerateVisualContent;
         }
 
+        //TODO: check redundant parameters
         internal void OpenVisual(VisualElement root, Vector2 center)
         {
             RegisterCallback<PointerUpEvent>(PointerUpEventHandler, TrickleDown.TrickleDown);
@@ -33,7 +32,7 @@ namespace StansAssets.MarkingMenu
             RegisterCallback<PointerMoveEvent>(PointerMoveEventHandler, TrickleDown.TrickleDown);
             RegisterCallback<MouseMoveEvent>(MouseMoveEventHandler, TrickleDown.TrickleDown);
 
-            m_skipFirstGenerateVisualContext = true;
+            m_SkipFirstGenerateVisualContext = true;
         }
 
 
@@ -67,9 +66,9 @@ namespace StansAssets.MarkingMenu
         {
             if (Active)
             {
-                if (m_skipFirstGenerateVisualContext)
+                if (m_SkipFirstGenerateVisualContext)
                 {
-                    m_skipFirstGenerateVisualContext = false;
+                    m_SkipFirstGenerateVisualContext = false;
                     return;
                 }
 
