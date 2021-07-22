@@ -1,8 +1,8 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement name="markingMenuItemAdapter" class="markingMenuItemAdapter">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <StansAssets.MarkingMenu.MarkingMenuVisualElement name="markingMenuItemAdapter" class="markingMenuItemAdapter">
         <ui:VisualElement name="markingMenuItemAdapterButton" class="markingMenuItemAdapter-button">
             <ui:Label text="Item" name="markingMenuItemAdapterName" class="markingMenuItemAdapter-label"/>
         </ui:VisualElement>
         <ui:VisualElement name="markingMenuItemAdapterMenu" class="markingMenuItemAdapter-menu"/>
-    </ui:VisualElement>
+    </StansAssets.MarkingMenu.MarkingMenuVisualElement>
 </ui:UXML>
