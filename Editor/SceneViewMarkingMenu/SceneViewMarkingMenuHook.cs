@@ -83,6 +83,11 @@ namespace StansAssets.MarkingMenu
         {
             Event e = Event.current;
 
+            if (e.alt || e.control || e.button != 1) 
+            {
+                return;
+            }
+            
             // Open Marking Menu
             switch (e.type)
             {
