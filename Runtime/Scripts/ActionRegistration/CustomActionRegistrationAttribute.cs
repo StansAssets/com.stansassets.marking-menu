@@ -1,5 +1,4 @@
 ﻿using System;
-using StansAssets.MarkingMenu;
 
 namespace StansAssets.MarkingMenu
 {
