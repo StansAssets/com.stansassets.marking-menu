@@ -191,7 +191,7 @@ namespace StansAssets.MarkingMenu
                     m_ToggleMenus[args.Id].Set.Invoke(currentStateMenu);
                     break;
                 default:
-                    throw new Exception("Unknown type of model can't be handled");
+                    throw new ArgumentException($"Type '{nameof(args.Item.Model.Type)}' of '{nameof(args.Item.Model)}' can't be handled");
             }
         }
 
