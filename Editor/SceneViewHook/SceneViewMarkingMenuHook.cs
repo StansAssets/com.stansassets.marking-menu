@@ -11,41 +11,32 @@ namespace StansAssets.MarkingMenu
         static MarkingMenu s_MarkingMenu;
         static MouseDownContext s_MouseDownContext;
 
+        static MarkingMenu MarkingMenu
+        {
+            get
+            {
+                if (s_MarkingMenu == null)
+                {
+                    var model = Resources.Load("MarkingMenuModel") as MarkingMenuModel;
+                    s_MarkingMenu = new MarkingMenu();
+                    // Prevent default event handle
+                    s_MarkingMenu.Root.RegisterCallback<MouseUpEvent>((args) =>
+                    {
+                        args.PreventDefault();
+                    }, TrickleDown.TrickleDown);
+
+                    s_MarkingMenu.Init(model);
+                }
+                return s_MarkingMenu;
+            }
+        }
+
         static SceneViewMarkingMenuHook()
         {
             EditorApplication.delayCall += () =>
             {
-                Refresh();
                 SceneView.duringSceneGui += SceneViewOnDuringSceneGui;
             };
-        }
-
-        [MenuItem("Stan's Assets/Marking Menu/Refresh")]
-        static void Refresh()
-        {
-            s_MarkingMenu?.Close();
-
-            var model = Resources.Load("MarkingMenuModel") as MarkingMenuModel;
-            s_MarkingMenu = new MarkingMenu();
-            // Prevent default event handle
-            s_MarkingMenu.Root.RegisterCallback<MouseUpEvent>((args) =>
-            {
-                args.PreventDefault();
-            }, TrickleDown.TrickleDown);
-
-            s_MarkingMenu.Init(model);
-        }
-
-        [MenuItem("Stans Assets/Marking Menu/Open")]
-        static void Open()
-        {
-            SceneView.duringSceneGui += OpenMarkingMenuHook;
-        }
-
-        [MenuItem("Stans Assets/Marking Menu/Close")]
-        static void Close()
-        {
-            s_MarkingMenu.Close();
         }
 
         [MenuItem("Stans Assets/Marking Menu/Toggle Debug Mode")]
@@ -61,17 +52,17 @@ namespace StansAssets.MarkingMenu
             Rect localSceneViewRect = sceneView.position;
             localSceneViewRect.position = Vector2.zero;
 
-            s_MarkingMenu.Open(sceneView.rootVisualElement, localSceneViewRect.center);
+            MarkingMenu.Open(sceneView.rootVisualElement, localSceneViewRect.center);
         }
 
         static void SceneViewOnDuringSceneGui(SceneView sceneView)
         {
-            if (s_MarkingMenu != null)
+            if (MarkingMenuSettings.Instance.SceneViewMenuActive && MarkingMenu != null)
             {
                 // Set mouse position manually for SceneView because Unity Editor steals events
                 if (Event.current.type == EventType.Repaint)
                 {
-                    s_MarkingMenu.SetMousePosition(Event.current.mousePosition);
+                    MarkingMenu.SetMousePosition(Event.current.mousePosition);
                 }
 
                 HandleInput(sceneView);
@@ -82,11 +73,11 @@ namespace StansAssets.MarkingMenu
         {
             Event e = Event.current;
 
-            if (e.alt || e.control || e.button != 1) 
+            if (e.alt || e.control || e.button != 1)
             {
                 return;
             }
-            
+
             // Open Marking Menu
             switch (e.type)
             {
@@ -94,7 +85,7 @@ namespace StansAssets.MarkingMenu
                     s_MouseDownContext = new MouseDownContext(e.button == 1, e.mousePosition);
                     if (s_MouseDownContext.IsMouseDown)
                     {
-                        s_MarkingMenu.Open(sceneView.rootVisualElement, s_MouseDownContext.Position);
+                        MarkingMenu.Open(sceneView.rootVisualElement, s_MouseDownContext.Position);
 
                         // Mark event as used to allow the hovering UI elements by the cursor
                         // Otherwise UI elements will ignore mouse cursor until user pressed 'left' mouse button
@@ -103,7 +94,7 @@ namespace StansAssets.MarkingMenu
                     break;
             }
 
-            if (s_MarkingMenu.Active)
+            if (MarkingMenu.Active)
             {
                 Rect cursorRect = new Rect(0, 0, sceneView.camera.pixelWidth, sceneView.camera.pixelHeight);
                 EditorGUIUtility.AddCursorRect(cursorRect, MouseCursor.Arrow);
