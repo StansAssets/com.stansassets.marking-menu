@@ -13,12 +13,11 @@ namespace StansAssets.MarkingMenu
 
         public static void Register(MarkingMenu menu)
         {
-            menu.Register("Action1", () => EditorApplication.isPlaying = !EditorApplication.isPlaying);
-            menu.Register("Action2", () => EditorApplication.Exit(0));
-            menu.Register("Action3", () => EditorApplication.Beep());
-            menu.Register("Action4", () => EditorGUIUtility.PingObject(Selection.activeObject));
-            menu.Register("Action5", new ToggleContext((s) => { EditorApplication.isPlaying = s; }, () => { return EditorApplication.isPlaying;}));
-            menu.Register("Action6", new ToggleMenuContext((s) => { Enum.TryParse(s, out item); }, () => { return new ToggleMenuContextModel(Enum.GetNames(typeof(ItemType)), item.ToString());}));
+            menu.Register("Play", () => EditorApplication.isPlaying = !EditorApplication.isPlaying);
+            menu.Register("Build Settings", () => EditorApplication.ExecuteMenuItem("File/Build Settings"));
+            menu.Register("Player Settings", () => EditorApplication.ExecuteMenuItem("Edit/Project Settings/Player"));
+            menu.Register("Marking Menu Settings", () => EditorApplication.ExecuteMenuItem(MarkingMenuPackage.RootMenu + "Settings"));
+            menu.Register("GitHub Page", () => Application.OpenURL("https://github.com/StansAssets/com.stansassets.marking-menu"));
         }
     }
 }
