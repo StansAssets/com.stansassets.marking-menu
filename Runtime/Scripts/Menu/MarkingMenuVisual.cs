@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace StansAssets.MarkingMenu
 {
-    public partial class MarkingMenu: VisualElement
+    public partial class MarkingMenu : VisualElement
     {
         const int k_TextureSize = 16;
         Texture2D m_Texture;
@@ -34,8 +34,6 @@ namespace StansAssets.MarkingMenu
 
             m_SkipFirstGenerateVisualContext = true;
         }
-
-
 
         internal void CloseVisual()
         {
@@ -79,7 +77,8 @@ namespace StansAssets.MarkingMenu
                 };
                 RenderUtility.Quad(ConvertPosition(Center), Vector2.one * 6, Color.grey, m_Texture, context);
                 RenderUtility.Quad(ConvertPosition(m_MousePosition), Vector2.one * 4, Color.black, m_Texture, context);
-                RenderUtility.Line(ConvertPosition(Center), ConvertPosition(m_MousePosition), 2, Color.black, m_Texture, context);
+                RenderUtility.Line(ConvertPosition(Center), ConvertPosition(m_MousePosition), 2, Color.black, m_Texture,
+                    context);
             }
         }
 
@@ -123,6 +122,7 @@ namespace StansAssets.MarkingMenu
                 item.Execute();
                 return true;
             }
+
             return false;
         }
 
@@ -157,6 +157,7 @@ namespace StansAssets.MarkingMenu
                     AngleSelectionItem?.SetHighlight(false);
                     AngleSelectionItem = nearestItem;
                 }
+
                 AngleSelectionItem?.SetHighlight(true);
             }
         }

@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" sa="StansAssets.Foundation.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="core-settings-block" class="stansassets-settings-block" style="background-color: rgb(58, 58, 58); padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
+        <ui:VisualElement name="header">
+            <ui:Label text="Core Settings" display-tooltip-when-elided="true" name="title" style="-unity-font-style: bold;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="content">
+            <ui:Toggle label="Scene View Menu" name="scene-view-menu" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -17,37 +17,31 @@ MonoBehaviour:
   Items:
   - DisplayName: Play
     RelativePosition: {x: 0, y: -60}
-    Size: {x: 80, y: 20}
     Pivot: {x: 0.5, y: 0.5}
+    Size: {x: 80, y: 30}
     Type: 0
-    CustomItemId: Action1
-  - DisplayName: Exit
+    CustomItemId: Play
+  - DisplayName: Build Settings
     RelativePosition: {x: 0, y: 60}
-    Size: {x: 80, y: 20}
     Pivot: {x: 0.5, y: 0.5}
+    Size: {x: 100, y: 30}
     Type: 0
-    CustomItemId: Action2
-  - DisplayName: Beep
+    CustomItemId: Build Settings
+  - DisplayName: Player Settings
     RelativePosition: {x: 130, y: 0}
-    Size: {x: 80, y: 20}
     Pivot: {x: 0.5, y: 0.5}
+    Size: {x: 100, y: 30}
     Type: 0
-    CustomItemId: Action3
-  - DisplayName: Ping
+    CustomItemId: Player Settings
+  - DisplayName: Marking Menu Settings
     RelativePosition: {x: -130, y: 0}
-    Size: {x: 80, y: 20}
     Pivot: {x: 0.5, y: 0.5}
+    Size: {x: 150, y: 30}
     Type: 0
-    CustomItemId: Action4
-  - DisplayName: isPlaying
+    CustomItemId: Marking Menu Settings
+  - DisplayName: GitHub Page
     RelativePosition: {x: -130, y: -30}
-    Size: {x: 100, y: 20}
     Pivot: {x: 0.5, y: 0.5}
-    Type: 1
-    CustomItemId: Action5
-  - DisplayName: State
-    RelativePosition: {x: 200, y: 30}
-    Size: {x: 155, y: 50}
-    Pivot: {x: 0.5, y: 0.5}
-    Type: 2
-    CustomItemId: Action6
+    Size: {x: 90, y: 30}
+    Type: 0
+    CustomItemId: GitHub Page
