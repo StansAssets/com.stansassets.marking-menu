@@ -1,5 +1,5 @@
 # Marking Menu
-The plugin allows you to make your personal menu with hotkey buttons to open Editor windows or make other actions.
+Marking Menu is a commonly used radial menu that gives you a TON of quick access functionality for your project. Setup project-related actions and speed up the development process in a few lines of code.
 
 [![NPM Package](https://img.shields.io/npm/v/com.stansassets.marking-menu)](https://www.npmjs.com/package/com.stansassets.marking-menu)
 [![openupm](https://img.shields.io/npm/v/com.stansassets.marking-menu?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.stansassets.marking-menu/)
@@ -7,7 +7,7 @@ The plugin allows you to make your personal menu with hotkey buttons to open Edi
 [![Issues](https://img.shields.io/github/issues/StansAssets/com.stansassets.marking-menu)](https://github.com/StansAssets/com.stansassets.marking-menu/issues)
 
 
-[API Reference](https://api.stansassets.com/foundation/StansAssets.Foundation.html) | [Wiki](https://github.com/StansAssets/com.stansassets.marking-menu/wiki)
+[Wiki](https://github.com/StansAssets/com.stansassets.marking-menu/wiki)
 
 #### Quick links to explore the library:
 * [Start using.](https://github.com/StansAssets/com.stansassets.marking-menu/wiki/Start-Using) Required setup steps
