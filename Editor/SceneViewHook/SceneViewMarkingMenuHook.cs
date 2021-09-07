@@ -11,14 +11,18 @@ namespace StansAssets.MarkingMenu
         static MarkingMenuModel s_CurrentModel;
         static MarkingMenu s_MarkingMenu;
         static MouseDownContext s_MouseDownContext;
-
+        static MarkingMenuModel s_MarkingMenuModel;
+        
         static MarkingMenu MarkingMenu
         {
             get
             {
                 if (s_MarkingMenu == null)
                 {
-                    var model = MarkingMenuModelContainer.Instance.MarkingMenuModel;
+                    MarkingMenuActions markingMenuActions = Resources.Load("MarkingMenuActions") as MarkingMenuActions;
+
+                    s_MarkingMenuModel = MarkingMenuModelContainer.Instance.MarkingMenuModel;
+                    s_MarkingMenuModel.Init(markingMenuActions);
                     s_MarkingMenu = new MarkingMenu();
                     // Prevent default event handle
                     s_MarkingMenu.Root.RegisterCallback<MouseUpEvent>((args) =>
@@ -26,7 +30,13 @@ namespace StansAssets.MarkingMenu
                         args.PreventDefault();
                     }, TrickleDown.TrickleDown);
 
-                    s_MarkingMenu.Init(model);
+                    s_MarkingMenu.Init(s_MarkingMenuModel);
+                }
+
+                if (MarkingMenuModelContainer.Instance == null)
+                {
+                    s_MarkingMenuModel = MarkingMenuModelContainer.Instance.MarkingMenuModel;
+                    s_MarkingMenu.Init(s_MarkingMenuModel);
                 }
                 return s_MarkingMenu;
             }

@@ -18,13 +18,17 @@ namespace StansAssets.MarkingMenu
         public MarkingMenuModel()
         {
             Items = new List<MarkingMenuItemModel>();
-
-            InitWithDefaultItems();
+        }
+        
+        public void Init(MarkingMenuActions markingMenuActions)
+        {
+            InitWithDefaultItems(markingMenuActions);
         }
 
-        private void InitWithDefaultItems()
+        private void InitWithDefaultItems(MarkingMenuActions markingMenuActions)
         {
-            Items.Add(new MarkingMenuItemModel()
+
+            Items.Add(new MarkingMenuItemModel(markingMenuActions.RegisterPlayAction)
             {
                 DisplayName = "Play",
                 RelativePosition = new Vector2(0, -60),
@@ -32,10 +36,9 @@ namespace StansAssets.MarkingMenu
                 Size = new Vector2(80f, 30f),
                 Type = ItemType.Action,
                 CustomItemId = "Play",
-                unityEvent = new UnityEvent()
             });
 
-            Items.Add(new MarkingMenuItemModel()
+            Items.Add(new MarkingMenuItemModel(markingMenuActions.RegisterBuildSettingsAction)
             {
                 DisplayName = "Build Settings",
                 RelativePosition = new Vector2(0, 60),
@@ -45,7 +48,7 @@ namespace StansAssets.MarkingMenu
                 CustomItemId = "Build Settings"
             });
 
-            Items.Add(new MarkingMenuItemModel()
+            Items.Add(new MarkingMenuItemModel(markingMenuActions.RegisterPlayerSettingsAction)
             {
                 DisplayName = "Player Settings",
                 RelativePosition = new Vector2(130, 0),
@@ -55,7 +58,7 @@ namespace StansAssets.MarkingMenu
                 CustomItemId = "Player Settings"
             });
 
-            Items.Add(new MarkingMenuItemModel()
+            Items.Add(new MarkingMenuItemModel(markingMenuActions.RegisterMarkingMenuSettingsAction)
             {
                 DisplayName = "Marking Menu Settings",
                 RelativePosition = new Vector2(-130, 0),
@@ -65,7 +68,7 @@ namespace StansAssets.MarkingMenu
                 CustomItemId = "Marking Menu Settings"
             });
 
-            Items.Add(new MarkingMenuItemModel()
+            Items.Add(new MarkingMenuItemModel(markingMenuActions.RegisterGitHubPageAction)
             {
                 DisplayName = "GitHub Page",
                 RelativePosition = new Vector2(-130, -30f),

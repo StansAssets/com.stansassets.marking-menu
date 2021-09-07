@@ -1,7 +1,9 @@
 ﻿using System;
+using NUnit.Framework.Internal;
 using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 namespace StansAssets.MarkingMenu
 {
@@ -23,18 +25,20 @@ namespace StansAssets.MarkingMenu
 
         public ItemType Type;
         public string CustomItemId;
-        public UnityEvent unityEvent; //PlaymodeActionItem
+        public UnityEvent unityEvent;
 
-        public MarkingMenuItemModel()
+        public MarkingMenuItemModel(Action actionEvent)
         {
             unityEvent = new UnityEvent();
-            unityEvent.AddListener(() => { });
+            unityEvent.AddListener(() =>
+            {
+                actionEvent();
+            });
 
             for (int i = 0; i < unityEvent.GetPersistentEventCount(); i++)
             {
                 unityEvent.SetPersistentListenerState(i, UnityEventCallState.EditorAndRuntime);
             }
-
         }
 
         // TODO: place to think about
