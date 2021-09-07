@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine.Events;
 
 namespace StansAssets.MarkingMenu
 {
@@ -8,6 +9,7 @@ namespace StansAssets.MarkingMenu
         internal ItemType Type;
         internal MarkingMenuItem Item;
         internal string Value;
+        internal UnityEvent UnityEvent;
     }
 
     class ActionItem : MarkingMenuItem
@@ -27,6 +29,7 @@ namespace StansAssets.MarkingMenu
             {
                 Id = m_ActionId,
                 Type = Model.Type,
+                UnityEvent = Model.unityEvent,
                 Item = this,
             });
         }

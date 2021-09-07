@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace StansAssets.MarkingMenu
 {
@@ -30,7 +31,8 @@ namespace StansAssets.MarkingMenu
                 Pivot = new Vector2(0.5f, 0.5f),
                 Size = new Vector2(80f, 30f),
                 Type = ItemType.Action,
-                CustomItemId = "Play"
+                CustomItemId = "Play",
+                unityEvent = new UnityEvent()
             });
 
             Items.Add(new MarkingMenuItemModel()

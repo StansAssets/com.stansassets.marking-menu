@@ -31,8 +31,7 @@ namespace StansAssets.MarkingMenu
             m_Model = model;
 
             m_Activator = new VisualElementMarkingMenuItemActivator();
-
-            RegisterActionsOutside();
+            
             CreateItems(m_Model);
 
             InitVisual(model);
@@ -40,52 +39,22 @@ namespace StansAssets.MarkingMenu
 
         public void Open(VisualElement root, Vector2 center)
         {
+            CreateItems(m_Model);
+            
             OpenCore(root, center);
             OpenVisual(root, center);
 
             OnOpened?.Invoke();
         }
 
-        public void Close()
+        private void Close()
         {
             CloseCore();
             CloseVisual();
 
             OnClosed?.Invoke();
         }
-
-        // Register all action from Marking Menu
-        public void Register(string id, Action action)
-        {
-            if (m_Actions.ContainsKey(id))
-            {
-                Debug.LogError($"Action with id: {id} is already added!");
-                return;
-            }
-
-            m_Actions[id] = action;
-        }
-
-        public void Register(string id, ToggleContext ctx)
-        {
-            if (m_Actions.ContainsKey(id))
-            {
-                Debug.LogError($"ToggleContext with id: {id} is already added!");
-                return;
-            }
-
-            m_Toggles[id] = ctx;
-        }
-        public void Register(string id, ToggleMenuContext ctx)
-        {
-            if (m_Actions.ContainsKey(id))
-            {
-                Debug.LogError($"ToggleMenuContext with id: {id} is already added!");
-                return;
-            }
-
-            m_ToggleMenus[id] = ctx;
-        }
+        
 #if UNITY_EDITOR
         public void SetMousePosition(Vector2 mousePosition)
         {

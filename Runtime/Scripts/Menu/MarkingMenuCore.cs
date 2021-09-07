@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,7 +7,6 @@ namespace StansAssets.MarkingMenu
 {
     public partial class MarkingMenu
     {
-        readonly Dictionary<string, Action> m_Actions = new Dictionary<string, Action>();
         readonly Dictionary<string, ToggleContext> m_Toggles = new Dictionary<string, ToggleContext>();
         readonly Dictionary<string, ToggleMenuContext> m_ToggleMenus = new Dictionary<string, ToggleMenuContext>();
 
@@ -44,6 +42,7 @@ namespace StansAssets.MarkingMenu
 
         void CreateItems(MarkingMenuModel model)
         {
+            m_Items.Clear();
             ItemCreationContext ctx = new ItemCreationContext(this);
             for (var i = 0; i < model.Items.Count; ++i)
             {
@@ -66,10 +65,6 @@ namespace StansAssets.MarkingMenu
             if (string.IsNullOrEmpty(item.Model.CustomItemId))
             {
                 throw new ArgumentException($"Item {item.Model.DisplayName} has Action type but CustomItemId is null or empty!");
-            }
-            if (m_Actions.ContainsKey(item.Model.CustomItemId) == false)
-            {
-                throw new ArgumentException($"Registration for action with id \"{item.Model.CustomItemId}\" not found!");
             }
 
             return true;
@@ -158,7 +153,7 @@ namespace StansAssets.MarkingMenu
             m_Model = null;
             Active = false;
 
-            m_Actions.Clear();
+            //m_Actions.Clear();
             m_Toggles.Clear();
             m_Items.Clear();
         }
@@ -179,9 +174,8 @@ namespace StansAssets.MarkingMenu
             switch (args.Item.Model.Type)
             {
                 case ItemType.Action:
-                    m_Actions[args.Id]?.Invoke();
+                    args.UnityEvent?.Invoke();
                     break;
-
                 case ItemType.Toggle:
                     bool currentState = m_Toggles[args.Id].Get.Invoke();
                     m_Toggles[args.Id].Set.Invoke(!currentState);
@@ -192,30 +186,6 @@ namespace StansAssets.MarkingMenu
                     break;
                 default:
                     throw new ArgumentException($"Type '{nameof(args.Item.Model.Type)}' of '{nameof(args.Item.Model)}' can't be handled");
-            }
-        }
-
-        void RegisterActionsOutside()
-        {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (var assembly in assemblies)
-            {
-                foreach (var type in assembly.GetTypes())
-                {
-                    var attributes = type.GetCustomAttributes(typeof(CustomActionRegistrationAttribute), false);
-                    if (attributes.Length > 0 && ((CustomActionRegistrationAttribute)attributes[0]).Enabled)
-                    {
-                        var method = type.GetMethod("Register", BindingFlags.Public | BindingFlags.Static);
-                        if (method != null)
-                        {
-                            method.Invoke(null, new object[] {this});
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException($"Class {type.Name} has CustomActionsRegistration attribute, but doesn't implement Register(IMarkingMenu menu) method");
-                        }
-                    }
-                }
             }
         }
     }
