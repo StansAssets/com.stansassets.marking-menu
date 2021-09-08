@@ -26,7 +26,9 @@ namespace StansAssets.MarkingMenu
                         args.PreventDefault();
                     }, TrickleDown.TrickleDown);
                     
-                    var markingMenuModel = GetMarkingMenuModel();
+                    var markingMenuActions = Resources.Load("MarkingMenuActions") as MarkingMenuActions;
+                    var markingMenuModel = MarkingMenuModelContainer.Instance.MarkingMenuModel;
+                    markingMenuModel.Init(markingMenuActions);
                     s_MarkingMenu.Init(markingMenuModel);
                 }
 
@@ -40,14 +42,6 @@ namespace StansAssets.MarkingMenu
             {
                 SceneView.duringSceneGui += SceneViewOnDuringSceneGui;
             };
-        }
-        
-        static MarkingMenuModel GetMarkingMenuModel()
-        {
-            var markingMenuActions = Resources.Load("MarkingMenuActions") as MarkingMenuActions;
-            var markingMenuModel = MarkingMenuModelContainer.Instance.MarkingMenuModel;
-            markingMenuModel.Init(markingMenuActions);
-            return markingMenuModel;
         }
 
         [MenuItem("Stans Assets/Marking Menu/Toggle Debug Mode")]
