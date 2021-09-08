@@ -1,10 +1,36 @@
 {
   "name": "com.stansassets.marking-menu",
   "displayName": "Stans Assets - Marking Menu",
-  "version": "0.0.1",
+  "version": "0.0.1-preview",
   "unity": "2020.1",
-  "description": "Marking Menu.",
+  "description": "Marking Menu is a commonly used radial menu that gives you a TON of quick access functionality for your project. Setup project-related actions and speed up the development process in a few lines of code.",
   "dependencies": {
     "com.stansassets.plugins-dev-kit": "1.0.1"
+  },
+  "keywords": [
+    "upm",
+    "npm",
+    "unity",
+    "unity3d",
+    "build",
+    "build-tool",
+    "kapps",
+    "stansassets"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Stan's Assets",
+    "email": "stan@stansassets.com",
+    "url": "https://stansassets.com/"
+  },
+
+  "homepage": "https://api.stansassets.com/",
+  "bugs": {
+    "url": "https://github.com/StansAssets/com.stansassets.marking-menu/issues",
+    "email" : "support@stansassets.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:StansAssets/com.stansassets.marking-menu.git"
   }
 }
