@@ -18,24 +18,18 @@ namespace StansAssets.MarkingMenu
             {
                 if (s_MarkingMenu == null)
                 {
-                    var markingMenuModel = GetMarkingMenuModel();
-                    
+
                     s_MarkingMenu = new MarkingMenu();
                     // Prevent default event handle
                     s_MarkingMenu.Root.RegisterCallback<MouseUpEvent>((args) =>
                     {
                         args.PreventDefault();
                     }, TrickleDown.TrickleDown);
-
-                    s_MarkingMenu.Init(markingMenuModel);
-                }
-
-                if (MarkingMenuModelContainer.Instance == null)
-                {
+                    
                     var markingMenuModel = GetMarkingMenuModel();
-
                     s_MarkingMenu.Init(markingMenuModel);
                 }
+
                 return s_MarkingMenu;
             }
         }
