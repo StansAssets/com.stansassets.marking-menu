@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace StansAssets.MarkingMenu
 {
@@ -20,11 +21,26 @@ namespace StansAssets.MarkingMenu
         public Vector2 Size = new Vector2(100f, 20f);
 
         public ItemType Type;
-        public string CustomItemId;//PlaymodeActionItem
-
+        public string CustomItemId;
+        public UnityEvent UnityEvent;
+        
         // TODO: place to think about
         // public int Id;
         // public List<int> Children;
         // public string UxmlPath;
+
+        public MarkingMenuItemModel(Action actionEvent)
+        {
+            UnityEvent = new UnityEvent();
+            UnityEvent.AddListener(() =>
+            {
+                actionEvent();
+            });
+
+            for (int i = 0; i < UnityEvent.GetPersistentEventCount(); i++)
+            {
+                UnityEvent.SetPersistentListenerState(i, UnityEventCallState.EditorAndRuntime);
+            }
+        }
     }
 }

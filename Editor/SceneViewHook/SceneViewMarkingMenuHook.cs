@@ -1,3 +1,4 @@
+using Editor.Model;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -17,16 +18,20 @@ namespace StansAssets.MarkingMenu
             {
                 if (s_MarkingMenu == null)
                 {
-                    var model = Resources.Load("MarkingMenuModel") as MarkingMenuModel;
+
                     s_MarkingMenu = new MarkingMenu();
                     // Prevent default event handle
                     s_MarkingMenu.Root.RegisterCallback<MouseUpEvent>((args) =>
                     {
                         args.PreventDefault();
                     }, TrickleDown.TrickleDown);
-
-                    s_MarkingMenu.Init(model);
+                    
+                    var markingMenuActions = Resources.Load("MarkingMenuActions") as MarkingMenuActions;
+                    var markingMenuModel = MarkingMenuModelContainer.Instance.MarkingMenuModel;
+                    markingMenuModel.Init(markingMenuActions);
+                    s_MarkingMenu.Init(markingMenuModel);
                 }
+
                 return s_MarkingMenu;
             }
         }
