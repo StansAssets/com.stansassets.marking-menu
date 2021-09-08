@@ -11,18 +11,15 @@ namespace StansAssets.MarkingMenu
         static MarkingMenuModel s_CurrentModel;
         static MarkingMenu s_MarkingMenu;
         static MouseDownContext s_MouseDownContext;
-        static MarkingMenuModel s_MarkingMenuModel;
-        
+
         static MarkingMenu MarkingMenu
         {
             get
             {
                 if (s_MarkingMenu == null)
                 {
-                    MarkingMenuActions markingMenuActions = Resources.Load("MarkingMenuActions") as MarkingMenuActions;
-
-                    s_MarkingMenuModel = MarkingMenuModelContainer.Instance.MarkingMenuModel;
-                    s_MarkingMenuModel.Init(markingMenuActions);
+                    var markingMenuModel = GetMarkingMenuModel();
+                    
                     s_MarkingMenu = new MarkingMenu();
                     // Prevent default event handle
                     s_MarkingMenu.Root.RegisterCallback<MouseUpEvent>((args) =>
@@ -30,13 +27,14 @@ namespace StansAssets.MarkingMenu
                         args.PreventDefault();
                     }, TrickleDown.TrickleDown);
 
-                    s_MarkingMenu.Init(s_MarkingMenuModel);
+                    s_MarkingMenu.Init(markingMenuModel);
                 }
 
                 if (MarkingMenuModelContainer.Instance == null)
                 {
-                    s_MarkingMenuModel = MarkingMenuModelContainer.Instance.MarkingMenuModel;
-                    s_MarkingMenu.Init(s_MarkingMenuModel);
+                    var markingMenuModel = GetMarkingMenuModel();
+
+                    s_MarkingMenu.Init(markingMenuModel);
                 }
                 return s_MarkingMenu;
             }
@@ -48,6 +46,14 @@ namespace StansAssets.MarkingMenu
             {
                 SceneView.duringSceneGui += SceneViewOnDuringSceneGui;
             };
+        }
+        
+        static MarkingMenuModel GetMarkingMenuModel()
+        {
+            var markingMenuActions = Resources.Load("MarkingMenuActions") as MarkingMenuActions;
+            var markingMenuModel = MarkingMenuModelContainer.Instance.MarkingMenuModel;
+            markingMenuModel.Init(markingMenuActions);
+            return markingMenuModel;
         }
 
         [MenuItem("Stans Assets/Marking Menu/Toggle Debug Mode")]

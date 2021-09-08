@@ -31,15 +31,13 @@ namespace StansAssets.MarkingMenu
             m_Model = model;
 
             m_Activator = new VisualElementMarkingMenuItemActivator();
-            
-            CreateItems(m_Model);
 
             InitVisual(model);
         }
 
         public void Open(VisualElement root, Vector2 center)
         {
-            CreateItems(m_Model);
+            UpdateItems(m_Model);
             
             OpenCore(root, center);
             OpenVisual(root, center);

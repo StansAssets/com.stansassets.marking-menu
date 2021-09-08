@@ -30,7 +30,7 @@ public class MarkingMenuActions : ScriptableObject
     public void RegisterMarkingMenuSettingsAction()
     {
 #if UNITY_EDITOR
-        EditorApplication.ExecuteMenuItem("Stan's Assets" + "/" + "Marking Menu" + "/" + "Settings");
+        EditorApplication.ExecuteMenuItem("Stan's Assets/Marking Menu/Settings");
 #endif
     }   
     

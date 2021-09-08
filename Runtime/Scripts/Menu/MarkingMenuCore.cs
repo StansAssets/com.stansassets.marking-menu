@@ -40,7 +40,7 @@ namespace StansAssets.MarkingMenu
             Active = false;
         }
 
-        void CreateItems(MarkingMenuModel model)
+        void UpdateItems(MarkingMenuModel model)
         {
             m_Items.Clear();
             ItemCreationContext ctx = new ItemCreationContext(this);
@@ -152,8 +152,7 @@ namespace StansAssets.MarkingMenu
         {
             m_Model = null;
             Active = false;
-
-            //m_Actions.Clear();
+            
             m_Toggles.Clear();
             m_Items.Clear();
         }
@@ -174,7 +173,7 @@ namespace StansAssets.MarkingMenu
             switch (args.Item.Model.Type)
             {
                 case ItemType.Action:
-                    args.UnityEvent?.Invoke();
+                    args.Item.Model.UnityEvent?.Invoke();
                     break;
                 case ItemType.Toggle:
                     bool currentState = m_Toggles[args.Id].Get.Invoke();

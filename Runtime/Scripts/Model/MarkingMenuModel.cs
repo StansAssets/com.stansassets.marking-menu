@@ -27,7 +27,8 @@ namespace StansAssets.MarkingMenu
 
         private void InitWithDefaultItems(MarkingMenuActions markingMenuActions)
         {
-
+            if(Items.Count != 0) return;
+            
             Items.Add(new MarkingMenuItemModel(markingMenuActions.RegisterPlayAction)
             {
                 DisplayName = "Play",
