@@ -4,6 +4,14 @@ using UnityEngine.UIElements;
 namespace StansAssets.MarkingMenu {
     static class RenderUtility
     {
+        /// <summary>
+        /// Render quad
+        /// </summary>
+        /// <param name="center">Center point</param>
+        /// <param name="size">Size of a quad</param>
+        /// <param name="color">Color of a quad</param>
+        /// <param name="texture2D">Quad texture</param>
+        /// <param name="context">MeshGenerationContext</param>
         internal static void Quad(Vector2 center, Vector2 size, Color color, Texture2D texture2D, MeshGenerationContext context)
         {
             var mesh = context.Allocate(4, 6, texture2D);
@@ -51,6 +59,15 @@ namespace StansAssets.MarkingMenu {
             mesh.SetNextIndex(2);
         }
 
+        /// <summary>
+        /// Rander line from point to point
+        /// </summary>
+        /// <param name="from">Start point position</param>
+        /// <param name="to">End point position</param>
+        /// <param name="width">Width of a line</param>
+        /// <param name="color">Color of a line</param>
+        /// <param name="texture2D">Texture of a line</param>
+        /// <param name="context">MeshGenerationContext</param>
         internal static void Line(Vector2 from, Vector2 to, int width, Color color, Texture2D texture2D, MeshGenerationContext context)
         {
             var mesh = context.Allocate(4, 6, texture2D);
@@ -61,12 +78,6 @@ namespace StansAssets.MarkingMenu {
             Vector2 p3 = (Vector2)(Quaternion.Euler(0f, 0f, 90) * lineVector.normalized * halfWidth) + from;
             Vector2 p2 = p1 + lineVector;
             Vector2 p4 = p3 + lineVector;
-
-            // var x0 = from.x;
-            // var y0 = from.y;
-            //
-            // var x1 = to.x;
-            // var y1 = to.y;
 
             //1
             mesh.SetNextVertex(new Vertex()

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace StansAssets.MarkingMenu
 {
@@ -20,6 +19,10 @@ namespace StansAssets.MarkingMenu
             Items = new List<MarkingMenuItemModel>();
         }
         
+        /// <summary>
+        /// Init MarkingMenuModel
+        /// </summary>
+        /// <param name="markingMenuActions">Actions for marking menu buttons</param>
         public void Init(MarkingMenuActions markingMenuActions)
         {
             InitWithDefaultItems(markingMenuActions);

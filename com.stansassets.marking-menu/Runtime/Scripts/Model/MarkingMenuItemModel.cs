@@ -23,11 +23,6 @@ namespace StansAssets.MarkingMenu
         public ItemType Type;
         public string CustomItemId;
         public UnityEvent UnityEvent;
-        
-        // TODO: place to think about
-        // public int Id;
-        // public List<int> Children;
-        // public string UxmlPath;
 
         public MarkingMenuItemModel(Action actionEvent)
         {
@@ -36,11 +31,6 @@ namespace StansAssets.MarkingMenu
             {
                 actionEvent();
             });
-
-            for (int i = 0; i < UnityEvent.GetPersistentEventCount(); i++)
-            {
-                UnityEvent.SetPersistentListenerState(i, UnityEventCallState.EditorAndRuntime);
-            }
         }
     }
 }
