@@ -26,12 +26,14 @@ namespace StansAssets.MarkingMenu
                         args.PreventDefault();
                     }, TrickleDown.TrickleDown);
                     
-                    var markingMenuActions = Resources.Load("MarkingMenuActions") as MarkingMenuActions;
                     var markingMenuModel = MarkingMenuModelContainer.Instance.MarkingMenuModel;
-                    markingMenuModel.Init(markingMenuActions);
+                    markingMenuModel.Init();
                     s_MarkingMenu.Init(markingMenuModel);
                 }
 
+                var markingMenuActions = Resources.Load("MarkingMenuActions") as MarkingMenuActions;
+                MarkingMenuModelContainer.Instance.MarkingMenuModel.UpdateDefaultItemActions(markingMenuActions);
+                
                 return s_MarkingMenu;
             }
         }
@@ -48,16 +50,6 @@ namespace StansAssets.MarkingMenu
         static void ToggleDebug()
         {
             MarkingMenu.DebugMode = !MarkingMenu.DebugMode;
-        }
-
-        static void OpenMarkingMenuHook(SceneView sceneView)
-        {
-            SceneView.duringSceneGui -= OpenMarkingMenuHook;
-
-            Rect localSceneViewRect = sceneView.position;
-            localSceneViewRect.position = Vector2.zero;
-
-            MarkingMenu.Open(sceneView.rootVisualElement, localSceneViewRect.center);
         }
 
         static void SceneViewOnDuringSceneGui(SceneView sceneView)

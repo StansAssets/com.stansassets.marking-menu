@@ -16,7 +16,7 @@ namespace StansAssets.MarkingMenu {
         /// <summary>
         /// VisualElement Uss class name.
         /// </summary>
-        public const string USSClassName = "stansassets-markingmenu-visualelement";
+        private const string USSClassName = "stansassets-markingmenu-visualelement";
 
         /// <summary>
         /// Creates new MarkingMenuVisualElement.
