@@ -14,7 +14,7 @@ namespace StansAssets.MarkingMenu
         const string k_LabelStyleDefault = "markingMenuItemAdapter-label";
 
         public ToggleItem(MarkingMenuItemModel model, bool state)
-            : base(model.GetHashCode(), model)
+            : base(model)
         {
             m_ActionId = model.CustomItemId;
             m_State = state;

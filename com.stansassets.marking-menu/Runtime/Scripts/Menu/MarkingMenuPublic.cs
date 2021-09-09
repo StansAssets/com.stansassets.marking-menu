@@ -6,9 +6,6 @@ namespace StansAssets.MarkingMenu
 {
     public partial class MarkingMenu
     {
-        public event Action OnOpened;
-        public event Action OnClosed;
-
         public bool Active { get; private set; }
         public VisualElement Root => this;
         public static bool DebugMode { get; set; }
@@ -23,7 +20,11 @@ namespace StansAssets.MarkingMenu
             schedule.Execute(UpdateDebugMode).Every(16);
 #endif
         }
-
+        
+        /// <summary>
+        /// Init MarkingMenu
+        /// </summary>
+        /// <param name="model">Marking menu model</param>
         public void Init(MarkingMenuModel model)
         {
             Reset();
@@ -32,25 +33,26 @@ namespace StansAssets.MarkingMenu
 
             m_Activator = new VisualElementMarkingMenuItemActivator();
 
-            InitVisual(model);
+            InitVisual();
         }
 
+        /// <summary>
+        /// Open MarkingMenu
+        /// </summary>
+        /// <param name="root">Parent for visual element</param>
+        /// <param name="center">Center of marking menu</param>
         public void Open(VisualElement root, Vector2 center)
         {
             UpdateItems(m_Model);
             
             OpenCore(root, center);
-            OpenVisual(root, center);
-
-            OnOpened?.Invoke();
+            OpenVisual();
         }
 
         private void Close()
         {
             CloseCore();
             CloseVisual();
-
-            OnClosed?.Invoke();
         }
         
 #if UNITY_EDITOR
@@ -73,15 +75,5 @@ namespace StansAssets.MarkingMenu
             }
         }
 #endif
-
-        protected void FireOnOpened()
-        {
-            OnOpened?.Invoke();
-        }
-
-        protected void FireOnClosed()
-        {
-            OnClosed?.Invoke();
-        }
     }
 }

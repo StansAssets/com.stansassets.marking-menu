@@ -8,26 +8,23 @@ namespace StansAssets.MarkingMenu
 {
     abstract class MarkingMenuItem
     {
-        protected const string k_DefaultItemUxmlName = "MarkingMenuItemAdapter";
-        protected const string k_DefaultItemUssName = "MarkingMenuItemAdapterPersonal";
-        protected const string k_ProItemUssName = "MarkingMenuItemAdapterPro";
+        private const string k_DefaultItemUxmlName = "MarkingMenuItemAdapter";
+        private const string k_DefaultItemUssName = "MarkingMenuItemAdapterPersonal";
+        private const string k_ProItemUssName = "MarkingMenuItemAdapterPro";
 
-        protected VisualElement m_RootElement;
-        protected Vector2 m_CenterPosition;
-        protected bool m_MouseOver;
-        
         public string DisplayName => Model.DisplayName;
         public MarkingMenuItemModel Model { get; }
-        public MarkingMenuVisualElement VisualElement { get; }
+        protected MarkingMenuVisualElement VisualElement { get; }
         public bool MouseOver => m_MouseOver;
-
-        protected readonly Label m_MenuItemLabel;
-        protected readonly VisualElement m_MenuItemContainer;
-
         Vector2 Position => new Vector2(m_CenterPosition.x + Model.RelativePosition.x - Model.Pivot.x * Model.Size.x , m_CenterPosition.y + Model.RelativePosition.y + Model.Pivot.y * Model.Size.y);
+        
+        protected readonly Label m_MenuItemLabel;
+        private readonly VisualElement m_MenuItemContainer;
+        private VisualElement m_RootElement;
+        private Vector2 m_CenterPosition;
+        private bool m_MouseOver;
 
-        //TODO: check the redundant parameter usefulness
-        protected MarkingMenuItem(int id, MarkingMenuItemModel model)
+        protected MarkingMenuItem(MarkingMenuItemModel model)
         {
             Model = model;
 
@@ -41,6 +38,11 @@ namespace StansAssets.MarkingMenu
             m_MenuItemLabel.pickingMode = PickingMode.Ignore;
         }
 
+        /// <summary>
+        /// Enable marking menu item
+        /// </summary>
+        /// <param name="rootElement">Parent for menu item</param>
+        /// <param name="center">Center of marking menu</param>
         public void Enable(VisualElement rootElement, Vector2 center)
         {
             m_RootElement = rootElement;
@@ -62,6 +64,9 @@ namespace StansAssets.MarkingMenu
             UpdateDataFromModel();
         }
 
+        /// <summary>
+        /// Disable an item and remove from marking menu
+        /// </summary>
         public void Disable()
         {
             m_RootElement?.Remove(VisualElement);
@@ -70,19 +75,23 @@ namespace StansAssets.MarkingMenu
             VisualElement?.UnregisterCallback<MouseOutEvent>(MouseOutEventHandler, TrickleDown.TrickleDown);
         }
 
+        /// <summary>
+        /// Execute marking menu item
+        /// </summary>
         public abstract void Execute();
 
-        public bool MouseOverItem()
-        {
-            return m_MouseOver;
-        }
-
+        /// <summary>
+        /// Update marking menu item data
+        /// </summary>
         public virtual void UpdateDataFromModel()
         {
             VisualElement.transform.position = Position;
             m_MenuItemLabel.text = Model.DisplayName;
         }
 
+        /// <summary>
+        /// Set marking menu item highlight state
+        /// </summary>
         public void SetHighlight(bool highlighted)
         {
             var newState = highlighted ? PseudoStates.Hover : PseudoStates.Root;
