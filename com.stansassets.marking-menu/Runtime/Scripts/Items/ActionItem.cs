@@ -16,7 +16,7 @@ namespace StansAssets.MarkingMenu
         readonly string m_ActionId;
 
         public ActionItem(MarkingMenuItemModel model)
-            : base(model.GetHashCode(), model)
+            : base(model)
         {
             m_ActionId = model.CustomItemId;
         }

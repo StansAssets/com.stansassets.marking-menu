@@ -11,9 +11,11 @@ namespace StansAssets.MarkingMenu
         bool m_SkipFirstGenerateVisualContext;
 
         MarkingMenuItem AngleSelectionItem { get; set; }
-
-        // TODO: is model parameter needed?
-        internal void InitVisual(MarkingMenuModel model)
+        
+        /// <summary>
+        /// Init Marking Menu visual part
+        /// </summary>
+        internal void InitVisual()
         {
             m_Texture = new Texture2D(k_TextureSize, k_TextureSize)
             {
@@ -22,9 +24,11 @@ namespace StansAssets.MarkingMenu
             };
             generateVisualContent += OnGenerateVisualContent;
         }
-
-        //TODO: check redundant parameters
-        internal void OpenVisual(VisualElement root, Vector2 center)
+        
+        /// <summary>
+        /// Register callbacks when open Marking Menu
+        /// </summary>
+        internal void OpenVisual()
         {
             RegisterCallback<PointerUpEvent>(PointerUpEventHandler, TrickleDown.TrickleDown);
             RegisterCallback<MouseUpEvent>(MouseUpEventHandler, TrickleDown.TrickleDown);
@@ -35,6 +39,9 @@ namespace StansAssets.MarkingMenu
             m_SkipFirstGenerateVisualContext = true;
         }
 
+        /// <summary>
+        /// Unregister callbacks when close Marking Menu
+        /// </summary>
         internal void CloseVisual()
         {
             UnregisterCallback<PointerUpEvent>(PointerUpEventHandler, TrickleDown.TrickleDown);
@@ -130,7 +137,6 @@ namespace StansAssets.MarkingMenu
         {
             if (Active)
             {
-                // Check angle
                 Vector2 mousePos = m_MousePosition;
                 MarkingMenuItem nearestItem = null;
                 float nearestAngle = 360f;

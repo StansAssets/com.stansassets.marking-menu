@@ -12,15 +12,15 @@ namespace StansAssets.MarkingMenu
         string m_CurrentItem;
         string m_LastMouseOverItem;
         bool m_MouseOverItem;
-        
-        protected const string k_LabelStyleItem = "markingMenuItemAdapter-menu-item";
-        protected const string k_LabelStyleItemActive = "markingMenuItemAdapter-menu-item-active";
-        
-        protected readonly VisualElement m_ToggleMenuItemsContainer;
-        protected readonly Dictionary<string, Label> m_ToggleMenuItemsLabel = new Dictionary<string, Label>();
+
+        private const string k_LabelStyleItem = "markingMenuItemAdapter-menu-item";
+        private const string k_LabelStyleItemActive = "markingMenuItemAdapter-menu-item-active";
+
+        private readonly VisualElement m_ToggleMenuItemsContainer;
+        private readonly Dictionary<string, Label> m_ToggleMenuItemsLabel = new Dictionary<string, Label>();
 
         public ToggleMenuItem(MarkingMenuItemModel model, ToggleMenuContextModel items)
-            : base(model.GetHashCode(), model)
+            : base(model)
         {
             m_ActionId = model.CustomItemId;
             m_CurrentItem = items.CurrentItem;
@@ -41,7 +41,7 @@ namespace StansAssets.MarkingMenu
             m_LastMouseOverItem = m_CurrentItem;
             ChangeActiveItem(m_CurrentItem);
         }
-
+        
         public override void Execute()
         {
             if (m_MouseOverItem)

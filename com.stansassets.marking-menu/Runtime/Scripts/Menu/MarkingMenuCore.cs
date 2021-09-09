@@ -58,7 +58,13 @@ namespace StansAssets.MarkingMenu
             }
         }
 
-        internal bool TryRegisterActionItem(ActionItem item)
+        /// <summary>
+        /// Register action on button in marking menu
+        /// </summary>
+        /// <param name="item">Marking menu item</param>
+        /// <returns>Return true if registration was successful</returns>
+        /// <exception cref="ArgumentException"></exception>
+        internal void RegisterActionItem(ActionItem item)
         {
             item.OnItemExecuted += OnItemExecutedHandler;
 
@@ -66,11 +72,15 @@ namespace StansAssets.MarkingMenu
             {
                 throw new ArgumentException($"Item {item.Model.DisplayName} has Action type but CustomItemId is null or empty!");
             }
-
-            return true;
         }
         
-        internal bool TryRegisterToggleItem(ToggleItem item)
+        /// <summary>
+        /// Register toggle in marking menu
+        /// </summary>
+        /// <param name="item">Toggle item</param>
+        /// <returns>Return true if registration was successful</returns>
+        /// <exception cref="ArgumentException"></exception>
+        internal void RegisterToggleItem(ToggleItem item)
         {
             item.OnItemExecuted += OnItemExecutedHandler;
 
@@ -82,11 +92,15 @@ namespace StansAssets.MarkingMenu
             {
                 throw new ArgumentException($"Registration for action with id \"{item.Model.CustomItemId}\" not found!");
             }
-
-            return true;
         }
         
-        internal bool TryRegisterToggleMenuItem(ToggleMenuItem item)
+        /// <summary>
+        /// Register toggle menu item in marking menu
+        /// </summary>
+        /// <param name="item">Toggle menu item</param>
+        /// <returns>Return true if registration was successful</returns>
+        /// <exception cref="ArgumentException"></exception>
+        internal bool RegisterToggleMenuItem(ToggleMenuItem item)
         {
             item.OnItemExecuted += OnItemExecutedHandler;
 
@@ -102,6 +116,12 @@ namespace StansAssets.MarkingMenu
             return true;
         }
         
+        /// <summary>
+        /// Get toggle menu context from m_ToggleMenus list
+        /// </summary>
+        /// <param name="key">CustomItemId of MarkingMenuItemModel</param>
+        /// <returns>Return ToggleMenuContext</returns>
+        /// <exception cref="ArgumentException"></exception>
         internal ToggleMenuContext TryGetToggleMenuContext(string key)
         {
             if (string.IsNullOrEmpty(key))
@@ -116,6 +136,12 @@ namespace StansAssets.MarkingMenu
             return m_ToggleMenus[key];
         }
 
+        /// <summary>
+        /// Get toggle context from m_Toggles list
+        /// </summary>
+        /// <param name="key">CustomItemId of MarkingMenuItemModel</param>
+        /// <returns>Return ToggleContext</returns>
+        /// <exception cref="ArgumentException"></exception>
         internal ToggleContext TryGetToggleContext(string key)
         {
             if (string.IsNullOrEmpty(key))
