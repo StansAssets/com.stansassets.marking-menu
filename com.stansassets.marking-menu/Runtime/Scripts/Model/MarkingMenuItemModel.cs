@@ -24,13 +24,9 @@ namespace StansAssets.MarkingMenu
         public string CustomItemId;
         public UnityEvent UnityEvent;
 
-        public MarkingMenuItemModel(Action actionEvent)
+        public MarkingMenuItemModel()
         {
             UnityEvent = new UnityEvent();
-            UnityEvent.AddListener(() =>
-            {
-                actionEvent();
-            });
         }
     }
 }

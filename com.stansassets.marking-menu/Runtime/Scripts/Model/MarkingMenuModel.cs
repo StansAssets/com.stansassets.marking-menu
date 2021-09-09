@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace StansAssets.MarkingMenu
@@ -22,17 +23,54 @@ namespace StansAssets.MarkingMenu
         /// <summary>
         /// Init MarkingMenuModel
         /// </summary>
-        /// <param name="markingMenuActions">Actions for marking menu buttons</param>
-        public void Init(MarkingMenuActions markingMenuActions)
+        public void Init()
         {
-            InitWithDefaultItems(markingMenuActions);
+            InitWithDefaultItems();
         }
 
-        private void InitWithDefaultItems(MarkingMenuActions markingMenuActions)
+        /// <summary>
+        /// Update menu item buttons with default actions
+        /// </summary>
+        /// <param name="markingMenuActions">ScriptableObject with actions for marking menu buttons</param>
+        public void UpdateDefaultItemActions(MarkingMenuActions markingMenuActions)
+        {
+            foreach (var item in Items)
+            {
+                switch (item.CustomItemId)
+                {
+                    case "Play":
+                        item.UnityEvent.RemoveAllListeners();
+                        item.UnityEvent.AddListener(markingMenuActions.RegisterPlayAction);
+                        break;
+                    
+                    case "Build Settings":
+                        item.UnityEvent.RemoveAllListeners();
+                        item.UnityEvent.AddListener(markingMenuActions.RegisterBuildSettingsAction);
+                        break;
+                    
+                    case "Player Settings":
+                        item.UnityEvent.RemoveAllListeners();
+                        item.UnityEvent.AddListener(markingMenuActions.RegisterPlayerSettingsAction);
+                        break;
+                    
+                    case "Marking Menu Settings":
+                        item.UnityEvent.RemoveAllListeners();
+                        item.UnityEvent.AddListener(markingMenuActions.RegisterMarkingMenuSettingsAction);
+                        break;
+                    
+                    case "GitHub Page":
+                        item.UnityEvent.RemoveAllListeners();
+                        item.UnityEvent.AddListener(markingMenuActions.RegisterGitHubPageAction);
+                        break;
+                }
+            }
+        }
+
+        private void InitWithDefaultItems()
         {
             if(Items.Count != 0) return;
             
-            Items.Add(new MarkingMenuItemModel(markingMenuActions.RegisterPlayAction)
+            Items.Add(new MarkingMenuItemModel()
             {
                 DisplayName = "Play",
                 RelativePosition = new Vector2(0, -60),
@@ -42,7 +80,7 @@ namespace StansAssets.MarkingMenu
                 CustomItemId = "Play",
             });
 
-            Items.Add(new MarkingMenuItemModel(markingMenuActions.RegisterBuildSettingsAction)
+            Items.Add(new MarkingMenuItemModel()
             {
                 DisplayName = "Build Settings",
                 RelativePosition = new Vector2(0, 60),
@@ -52,7 +90,7 @@ namespace StansAssets.MarkingMenu
                 CustomItemId = "Build Settings"
             });
 
-            Items.Add(new MarkingMenuItemModel(markingMenuActions.RegisterPlayerSettingsAction)
+            Items.Add(new MarkingMenuItemModel()
             {
                 DisplayName = "Player Settings",
                 RelativePosition = new Vector2(130, 0),
@@ -62,7 +100,7 @@ namespace StansAssets.MarkingMenu
                 CustomItemId = "Player Settings"
             });
 
-            Items.Add(new MarkingMenuItemModel(markingMenuActions.RegisterMarkingMenuSettingsAction)
+            Items.Add(new MarkingMenuItemModel()
             {
                 DisplayName = "Marking Menu Settings",
                 RelativePosition = new Vector2(-130, 0),
@@ -72,7 +110,7 @@ namespace StansAssets.MarkingMenu
                 CustomItemId = "Marking Menu Settings"
             });
 
-            Items.Add(new MarkingMenuItemModel(markingMenuActions.RegisterGitHubPageAction)
+            Items.Add(new MarkingMenuItemModel()
             {
                 DisplayName = "GitHub Page",
                 RelativePosition = new Vector2(-130, -30f),
