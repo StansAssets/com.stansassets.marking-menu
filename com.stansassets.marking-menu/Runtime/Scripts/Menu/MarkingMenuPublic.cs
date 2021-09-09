@@ -24,7 +24,7 @@ namespace StansAssets.MarkingMenu
         /// <summary>
         /// Init MarkingMenu
         /// </summary>
-        /// <param name="model">MarkingMenuModel</param>
+        /// <param name="model">Marking menu model</param>
         public void Init(MarkingMenuModel model)
         {
             Reset();

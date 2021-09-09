@@ -39,7 +39,7 @@ namespace StansAssets.MarkingMenu
         }
 
         /// <summary>
-        /// Enable marking menu ite
+        /// Enable marking menu item
         /// </summary>
         /// <param name="rootElement">Parent for menu item</param>
         /// <param name="center">Center of marking menu</param>
@@ -65,7 +65,7 @@ namespace StansAssets.MarkingMenu
         }
 
         /// <summary>
-        /// Disable marking menu
+        /// Disable an item and remove from marking menu
         /// </summary>
         public void Disable()
         {
@@ -90,9 +90,8 @@ namespace StansAssets.MarkingMenu
         }
 
         /// <summary>
-        /// Highlight marking menu item
+        /// Set marking menu item highlight state
         /// </summary>
-        /// <param name="highlighted"></param>
         public void SetHighlight(bool highlighted)
         {
             var newState = highlighted ? PseudoStates.Hover : PseudoStates.Root;
