@@ -1,7 +1,7 @@
 {
   "name": "com.stansassets.marking-menu",
   "displayName": "Stans Assets - Marking Menu",
-  "version": "0.0.1-preview",
+  "version": "0.0.2-preview",
   "unity": "2020.1",
   "description": "Marking Menu is a commonly used radial menu that gives you a TON of quick access functionality for your project. Setup project-related actions and speed up the development process in a few lines of code.",
   "dependencies": {
