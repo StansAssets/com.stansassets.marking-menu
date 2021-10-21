@@ -46,7 +46,7 @@ namespace StansAssets.MarkingMenu
             };
         }
 
-        [MenuItem("Stans Assets/Marking Menu/Toggle Debug Mode")]
+        [MenuItem("Stan's Assets/Marking Menu/Toggle Debug Mode")]
         static void ToggleDebug()
         {
             MarkingMenu.DebugMode = !MarkingMenu.DebugMode;
