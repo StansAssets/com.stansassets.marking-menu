@@ -43,10 +43,15 @@ namespace StansAssets.MarkingMenu
         /// <param name="center">Center of marking menu</param>
         public void Open(VisualElement root, Vector2 center)
         {
-            UpdateItems(m_Model);
+            if (Active) {
+                return;
+            } 
             
+            UpdateItems(m_Model);
             OpenCore(root, center);
             OpenVisual();
+
+           
         }
 
         private void Close()
